@@ -1,4 +1,0 @@
-
-
-class Expiration:
-    pass

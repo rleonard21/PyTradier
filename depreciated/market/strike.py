@@ -1,5 +1,0 @@
-
-
-
-class Strike:
-    pass
