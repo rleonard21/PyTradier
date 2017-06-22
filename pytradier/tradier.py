@@ -2,6 +2,7 @@
 from const import API_ENDPOINT
 from . import company
 from . import account
+from . import order
 
 class Tradier:
     def __init__(self, token, account_id=None, endpoint=None):
@@ -15,10 +16,10 @@ class Tradier:
     def account(self):
         return account.Account()
 
-
-
-
     def company(self, symbol):
         return company.Company(symbol=symbol)
+
+    def order(self):
+        return order.Order()
 
 
