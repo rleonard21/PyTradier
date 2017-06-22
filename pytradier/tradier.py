@@ -1,6 +1,7 @@
 
 from const import API_ENDPOINT
 from . import company
+from . import account
 
 class Tradier:
     def __init__(self, token, account_id=None, endpoint=None):
@@ -11,5 +12,13 @@ class Tradier:
         if self.__endpoint is None:  # user did not specify an endpoint
             self.__endpoint = API_ENDPOINT['sandbox']  # default endpoint is the sandbox
 
+    def account(self):
+        return account.Account()
+
+
+
+
     def company(self, symbol):
         return company.Company(symbol=symbol)
+
+

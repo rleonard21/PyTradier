@@ -5,5 +5,43 @@ class Stats:
         self.__period = period
 
 
+    # TODO: Error raising- some of these aren't returned every time
+
+    def share_class_id(self):
+        pass
+
+    def as_of_date(self):
+        pass
+
+    def period(self):
+        pass
+
+    def closest_to_moving_average(self):
+        pass
+
     def moving_average(self):
-        
+        pass
+
+    def non_div_alpha(self):
+        pass
+
+    def non_div_beta(self):
+        pass
+
+    def average_volume(self):
+        pass
+
+    def high(self):
+        pass
+
+    def low(self):
+        pass
+
+    def percent_below_high(self):
+        pass
+
+    def total_volume(self):
+        pass
+
+
+
