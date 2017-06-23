@@ -1,10 +1,10 @@
 # Constants for Tradier.com
 
 API_ENDPOINT = {
-    'sandbox':                  'sandbox.tradier.com',  # /v1/ paths
-    'brokerage':                'api.tradier.com',      # /v1/ paths
-    'stream':                   'stream.tradier.com',   # /v1/ paths
-    'beta':                     'api.tradier.com'       # /beta/ paths
+    'sandbox':                  'https://sandbox.tradier.com',  # /v1/ paths
+    'brokerage':                'https://api.tradier.com',      # /v1/ paths
+    'stream':                   'https://stream.tradier.com',   # /v1/ paths
+    'beta':                     'https://api.tradier.com'       # /beta/ paths
 }
 
 
