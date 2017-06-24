@@ -1,24 +1,30 @@
 import requests
 import json
-import credentials
+import os
 
 
-def API_response(endpoint, path, payload):
+class Base(object):
 
-    if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}
-        raise TypeError
+    def __init__(self):
+        self.__token = os.environ['API_TOKEN']
+        self.__id = os.environ['API_ACCOUNT_ID']
 
-    headers = {"Accept": "application/json",
-               "Authorization": "Bearer " + credentials.ACCESS_TOKEN
-               }
 
-    payload = {'symbols': 'AAPL'}
 
-    r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-    print r.url
+    def _api_response(self, endpoint, path, payload):
 
-    j = json.loads(r.content)
+        if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}
+            raise TypeError
 
-    return j
+        headers = {"Accept": "application/json",
+                   "Authorization": "Bearer " + self.__token}
+
+        r = requests.request('GET', endpoint + path, headers=headers, params=payload)
+        # print r.url
+        # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
+
+        j = json.loads(r.content)
+
+        return j
 
 
