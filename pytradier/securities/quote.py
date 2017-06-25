@@ -21,7 +21,6 @@ class Quote(Base):
                                       path=API_PATH['quotes'],
                                       payload=self._payload)
 
-
     def _api_quote(self, attribute):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
         response_load = {}
@@ -40,14 +39,13 @@ class Quote(Base):
 
         return response_load
 
-
     def update_data(self):
         self.__data = self._api_response(endpoint=self._endpoint,
                                          path=API_PATH['quotes'],
                                          payload=self._payload)
         # print self.__data
 
-    def add_symbol(self, *symbols, **config):
+    def add_symbols(self, *symbols, **config):
         # adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to
         # call the API for new data
 
@@ -60,7 +58,6 @@ class Quote(Base):
         if 'update' in config.keys() and config['update'] is True:
             # update the data if the `update` parameter is true
             self.update_data()
-
 
     def symbol(self):
         return self._api_quote('symbol')
