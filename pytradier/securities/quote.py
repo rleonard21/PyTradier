@@ -45,7 +45,6 @@ class Quote(Base):
         self.__data = self._api_response(endpoint=self._endpoint,
                                          path=API_PATH['quotes'],
                                          payload=self._payload)
-
         # print self.__data
 
     def add_symbol(self, *symbols, **config):
@@ -64,7 +63,126 @@ class Quote(Base):
 
 
     def symbol(self):
-        pass
+        data = self._api_quote('symbol')
+
+        return data
 
     def desc(self):
-        pass
+        data = self._api_quote('description')
+
+        return data
+
+    def exchange(self):
+        data = self._api_quote('exch')
+
+        return data
+
+    def type(self):
+        data = self._api_quote('type')
+
+        return data
+
+    def change(self):
+        data = self._api_quote('change')
+
+        return data
+
+    def change_percentage(self):
+        data = self._api_quote('change_percentage')
+
+        return data
+
+    def volume(self):
+        data = self._api_quote('volume')
+
+        return data
+
+    def average_volume(self):
+        data = self._api_quote('average_volume')
+
+        return data
+
+    def last_volume(self):
+        data = self._api_quote('last_volume')
+
+        return data
+
+    def trade_date(self):
+        data = self._api_quote('trade_date')
+
+        return data
+
+    def open(self):
+        data = self._api_quote('open')
+
+        return data
+
+    def high(self):
+        data = self._api_quote('high')
+
+        return data
+
+    def low(self):
+        data = self._api_quote('low')
+
+        return data
+
+    def close(self):
+        data = self._api_quote('close')
+
+        return data
+
+    def prevclose(self):
+        data = self._api_quote('prevclose')
+
+        return data
+
+    def week_52_high(self):
+        data = self._api_quote('week_52_high')
+
+        return data
+
+    def week_52_low(self):
+        data = self._api_quote('week_52_low')
+
+        return data
+
+    def bid(self):
+        data = self._api_quote('bid')
+
+        return data
+
+    def bidsize(self):
+        data = self._api_quote('bidsize')
+
+        return data
+
+    def bidexch(self):
+        data = self._api_quote('bidexch')
+
+        return data
+
+    def bid_date(self):
+        data = self._api_quote('bid_date')
+
+        return data
+
+    def ask(self):
+        data = self._api_quote('ask')
+
+        return data
+
+    def asksize(self):
+        data = self._api_quote('asksize')
+
+        return data
+
+    def askexch(self):
+        data = self._api_quote('askexch')
+
+        return data
+
+    def ask_date(self):
+        data = self._api_quote('ask_date')
+
+        return data
