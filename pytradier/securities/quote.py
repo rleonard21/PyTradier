@@ -48,15 +48,17 @@ class Quote(Base):
 
         # print self.__data
 
-    def add_symbol(self, symbol, update=True):
+    def add_symbol(self, *symbols, **config):
         # adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to
         # call the API for new data
 
-        self._symbols.append(symbol)
+        for symbol in symbols:  # iterate through each new symbol
+            self._symbols.append(symbol)
+
         self._symbol_load = ','.join(self._symbols)
         self._payload = {'symbols': self._symbol_load}
 
-        if update:
+        if 'update' in config.keys() and config['update'] is True:
             # update the data if the `update` parameter is true
             self.update_data()
 
