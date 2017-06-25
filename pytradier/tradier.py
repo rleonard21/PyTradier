@@ -6,8 +6,14 @@ from . import account
 from . import order
 from . import market
 
+from securities import stock, option
+
+from .exceptions import ClientException
+
 import os
 # from . import user
+
+
 
 class Tradier:
 
@@ -26,12 +32,17 @@ class Tradier:
             os.environ['API_ENDPOINT'] = API_ENDPOINT['sandbox']  # default endpoint is the sandbox
 
         else:
-            os.environ['API_ENDPOINT'] = API_ENDPOINT[endpoint]
+            try:
+                os.environ['API_ENDPOINT'] = API_ENDPOINT[endpoint]
+
+            except KeyError:
+                raise ClientException('Given endpoint not supported.')
+
 
 
 
     def account(self):
-        return account.Account()#self.__token, self.__account_id, self.__endpoint)
+        return account.Account()
 
     def company(self, symbol):
         return company.Company(symbol=symbol)
@@ -41,6 +52,12 @@ class Tradier:
 
     def order(self):
         return order.Order()
+
+    def stock(self, *symbols):
+        return stock.Stock(*symbols)
+
+    def option(self, *symbols):
+        return option.Option(*symbols)
 
 
 

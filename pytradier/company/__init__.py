@@ -6,7 +6,7 @@ from ratio import Ratio
 from report import Report
 from stats import Stats
 
-from securities.stock import Stock
-from securities.option import Option
+# from securities.stock import Stock
+# from securities.option import Option
 
 from company import Company

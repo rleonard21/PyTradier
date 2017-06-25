@@ -6,7 +6,8 @@
 # from report import Report
 # from stats import Stats
 
-import securities
+from ..securities.option import Option
+from ..securities.stock import Stock
 
 
 class Company:
@@ -14,19 +15,19 @@ class Company:
         self.__symbol = symbol
 
 
-    def stock(self):
-        # Returns an instance of the stock class and uses the same ticker from the company
-
-        return securities.Stock(self.__symbol)
-
-    def option(self, symbol):
-        # returns instance of option class and requires an Option symbol and the expiration for the option
-        # both of these can be found using the chain() function: Company.chain()
-        # for example:  Company.option('SPY140627C00195500')
-
-        return securities.Option(symbol=symbol)
-
-
+    # def stock(self):
+    #     # Returns an instance of the stock class and uses the same ticker from the company
+    #
+    #     return securities.Stock(self.__symbol)
+    #
+    # def option(self, *symbols):
+    #     # returns instance of option class and requires an Option symbol and the expiration for the option
+    #     # both of these can be found using the chain() function: Company.chain()
+    #     # for example:  Company.option('SPY140627C00195500')
+    #
+    #     return securities.Option(*symbols)
+    #
+    #
 
 
     def chain(self):

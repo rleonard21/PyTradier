@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-
+from .exceptions import APIException
 
 class Base(object):
 
@@ -22,9 +22,19 @@ class Base(object):
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
         # print r.url
         # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
+        # print r.content
 
         j = json.loads(r.content)
 
-        return j
+        try:
+            j['fault']  # see if there is a fault message in the API response
+
+        except KeyError:
+            return j  # if no fault code, then return the API response
+
+        # if there is a fault code, raise an API exception
+        raise APIException(error_type=j['fault']['detail']['errorcode'],
+                           error_message=j['fault']['faultstring'])
+
 
 
