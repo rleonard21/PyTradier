@@ -63,126 +63,76 @@ class Quote(Base):
 
 
     def symbol(self):
-        data = self._api_quote('symbol')
-
-        return data
+        return self._api_quote('symbol')
 
     def desc(self):
-        data = self._api_quote('description')
-
-        return data
+        return self._api_quote('description')
 
     def exchange(self):
-        data = self._api_quote('exch')
-
-        return data
+        return self._api_quote('exch')
 
     def type(self):
-        data = self._api_quote('type')
-
-        return data
+        return self._api_quote('type')
 
     def change(self):
-        data = self._api_quote('change')
-
-        return data
+        return self._api_quote('change')
 
     def change_percentage(self):
-        data = self._api_quote('change_percentage')
-
-        return data
+        return self._api_quote('change_percentage')
 
     def volume(self):
-        data = self._api_quote('volume')
-
-        return data
+        return self._api_quote('volume')
 
     def average_volume(self):
-        data = self._api_quote('average_volume')
-
-        return data
+        return self._api_quote('average_volume')
 
     def last_volume(self):
-        data = self._api_quote('last_volume')
-
-        return data
+        return self._api_quote('last_volume')
 
     def trade_date(self):
-        data = self._api_quote('trade_date')
-
-        return data
+        return self._api_quote('trade_date')
 
     def open(self):
-        data = self._api_quote('open')
-
-        return data
+        return self._api_quote('open')
 
     def high(self):
-        data = self._api_quote('high')
-
-        return data
+        return self._api_quote('high')
 
     def low(self):
-        data = self._api_quote('low')
-
-        return data
+        return self._api_quote('low')
 
     def close(self):
-        data = self._api_quote('close')
-
-        return data
+        return self._api_quote('close')
 
     def prevclose(self):
-        data = self._api_quote('prevclose')
-
-        return data
+        return self._api_quote('prevclose')
 
     def week_52_high(self):
-        data = self._api_quote('week_52_high')
-
-        return data
+        return self._api_quote('week_52_high')
 
     def week_52_low(self):
-        data = self._api_quote('week_52_low')
-
-        return data
+        return self._api_quote('week_52_low')
 
     def bid(self):
-        data = self._api_quote('bid')
-
-        return data
+        return self._api_quote('bid')
 
     def bidsize(self):
-        data = self._api_quote('bidsize')
-
-        return data
+        return self._api_quote('bidsize')
 
     def bidexch(self):
-        data = self._api_quote('bidexch')
-
-        return data
+        return self._api_quote('bidexch')
 
     def bid_date(self):
-        data = self._api_quote('bid_date')
-
-        return data
+        return self._api_quote('bid_date')
 
     def ask(self):
-        data = self._api_quote('ask')
-
-        return data
+        return self._api_quote('ask')
 
     def asksize(self):
-        data = self._api_quote('asksize')
-
-        return data
+        return self._api_quote('asksize')
 
     def askexch(self):
-        data = self._api_quote('askexch')
-
-        return data
+        return self._api_quote('askexch')
 
     def ask_date(self):
-        data = self._api_quote('ask_date')
-
-        return data
+        return self._api_quote('ask_date')
