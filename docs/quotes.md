@@ -26,31 +26,30 @@ These are the methods accessible to both `stock` and `option`:
 In addition to the above methods, the `options` class has a few additional functions specifically for options. 
 
 
-`strike()`
+###### `strike()`
 Returns the saved strike price of the option
 
 
-`expiration()`
+###### `expiration()`
 Returns the expiration date of the contract, in the format YYY-MM-DD
 
 
-`expiration_type()`
+###### `expiration_type()`
 Returns the type of expiration. For example, `weeklys` or `monthlys`.
 
 
-`option_type()`
+###### `option_type()`
 The type of option, `put` or `call`. 
 
 
-`contract_size()`
+###### `contract_size()`
 Size of the contract in shares.
 
 
-`underlying()`
+###### `underlying()`
 Returns the underlying symbol(s).
 
-
-`open_interest()`
+###### `open_interest()`
 Open interest for the contract.
 
 
