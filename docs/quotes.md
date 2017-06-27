@@ -132,7 +132,7 @@ tradier = Tradier(token='abc123', account_id=None, endpoint=None)
 stocks = tradier.stock('AAPL', 'MSFT', 'GOOG')
 
 # Call a method of the stock class
-stocks.bid(update=True)
+stocks.bid()
 ```
 The output is a dictionary and should look similar to this:
 ```python
