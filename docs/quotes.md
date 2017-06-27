@@ -23,6 +23,12 @@ tradier.option(*symbols)
 These are the methods accessible to both `stock` and `option`.
 Each function is set to update from the API by default. To prevent the program from calling Tradier's API (to preserve call limits), set the `update` parameter to false. 
 
+###### `update()`
+Updates the information for all symbols listed in the instance.
+
+###### `add_symbols(*symbols)`
+Add a symbol to the instance of the class. Can take multiple symbols. 
+
 ###### `symbol()`	
 Symbol, e.g. `AAPL`, `MSFT`, etc.
 
@@ -123,7 +129,9 @@ Returns the underlying symbol(s).
 ###### `open_interest()`
 Open interest for the contract.
 
-## Example Code
+# Example Code
+#### Getting started
+All programs will need to initalize the PyTradier class by first calling the `Tradier` class. 
 ```python
 # Initialize Tradier
 tradier = Tradier(token='abc123', account_id=None, endpoint=None)
@@ -132,12 +140,42 @@ tradier = Tradier(token='abc123', account_id=None, endpoint=None)
 stocks = tradier.stock('AAPL', 'MSFT', 'GOOG')
 
 # Call a method of the stock class
-stocks.bid()
+print stocks.bid()
 ```
 The output is a dictionary and should look similar to this:
 ```python
 {AAPL: 145.93, MSFT: 70.11, GOOG: 944.01}
 ```
+#### Adding symbols
+```python
+# add two symbols to the instance but do not update
+stocks.add_symbol('AMZN', 'NFLX', update=False)
+print stocks.symbol()
+```
+Since we set `update=False`, the library does not access the Tradier API until the update function is called. Thus, the ouput only contains the symbols as before:
+```python
+{AAPL: AAPL, MSFT: MSFT, GOOG: GOOG}
+```
+
+To update the stocks, calling the `update` method will fetch the most up-to-date information from the API:
+```python
+stocks.update()
+print stocks.symbol()
+```
+```python
+# output
+{AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, AMZN: AMZN, NFLX: NFLX}
+```
+By setting `update=False`, you have more control over when your script calls the API for new information, therefore giving you control over the API limit rates. Otherwise, `update=True` is default to give you the most up to date information. 
+
+
+
+
+
+
+
+
+
 
 
 
