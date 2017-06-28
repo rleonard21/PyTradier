@@ -1,42 +1,181 @@
-======
-Quotes
-======
+---
+title: Quotes
+permalink: quotes.html
+---
+# Quotes
+The `stock` and `option` classes inherit from the `quote` class. 
+```
+pytradier.securities.quote
+```
+## Stocks
+Create an instance of the `stock` class using one or more symbols:
+```python
+tradier.stock(*symbols)
+```
 
-Quotes
-======
+## Options
+Create an instance of the `option` class using one or more symbols:
+```python
+tradier.option(*symbols)
+```
 
-The ``quote`` class is the base class that both the ``stock`` class and
-``option`` class inherit from.
+## Methods
+These are the methods accessible to both `stock` and `option`.
+Each function is set to update from the API by default. To prevent the program from calling Tradier's API (to preserve call limits), set the `update` parameter to false. 
 
-::
+###### `update()`
+Updates the information for all symbols listed in the instance.
 
-    pytradier.securities.quote
+###### `add_symbols(*symbols)`
+Add a symbol to the instance of the class. Can take multiple symbols. 
 
-Stocks
-======
+###### `symbol()`	
+Symbol, e.g. `AAPL`, `MSFT`, etc.
 
-Create an instance of the ``stock`` class using one or more symbols:
+###### `desc(update=True)`
+Symbol description.
 
-.. code:: python
+###### `exch(update=True)`
+Exchange the symbol is sold on.
 
-    tradier.stock(*symbols)
+###### `type(update=True)`	
+Type of security (i.e. stock, etf, option, index)
 
-Options
-=======
+###### `change(update=True)`
+Daily net change
 
-Create an instance of the ``option`` class using one or more symbols:
+###### `change_percentage(update=True)`
+Daily net change in percent
 
-.. code:: python
+###### `volume(update=True)`	
+Volume for the day
 
-    tradier.option(*symbols)
+###### `average_volume(update=True)`
+Average daily volume
 
-Methods
--------
+###### `last_volume(update=True)`
+Last incremental volume
 
-These are the methods accessible to both ``stock`` and ``option``: # #
-In addition to the above methods, the ``options`` class has a few
-additional functions specifically for options.
+###### `trade_date(update=True)`
+Date and time of last trade
 
-``strike(update=False)``      Returns the saved strike price
+###### `open(update=True)`
+Opening price
 
-``expiration()``      Returns the saved strike price
+###### `high(update=True)`
+Trading day high
+
+###### `low(update=True)`
+Trading day low
+
+###### `close(update=True)`
+Closing price
+
+###### `prevclose(update=True)`
+Previous closing price
+
+###### `week_52_high(update=True)`
+52 week high
+
+###### `week_52_low(update=True)`
+52 week low
+
+###### `bid(update=True)`
+Current bid
+
+###### `bidsize(update=True)`
+Size of bid
+
+###### `bidexch(update=True)`
+Exchange of bid
+
+###### `bid_date(update=True)`
+Date and time of current bid
+
+###### `ask(update=True)`
+Current ask
+
+###### `asksize(update=True)`
+Size of ask
+
+###### `askexch(update=True)`
+Exchange of ask
+
+###### `ask_date(update=True)`
+Date and time of current ask
+
+
+##### Additional `option` Methods
+In addition to the above methods, the `option` class has a few additional functions specifically for options. 
+
+###### `strike()`
+Returns the saved strike price of the option
+
+###### `expiration()`
+Returns the expiration date of the contract, in the format YYY-MM-DD
+
+###### `expiration_type()`
+Returns the type of expiration. For example, `weeklys` or `monthlys`.
+
+###### `option_type()`
+The type of option, `put` or `call`. 
+
+###### `contract_size()`
+Size of the contract in shares.
+
+###### `underlying()`
+Returns the underlying symbol(s).
+
+###### `open_interest()`
+Open interest for the contract.
+
+# Example Code
+#### Getting started
+All programs will need to initalize the PyTradier class by first calling the `Tradier` class. 
+```python
+# Initialize Tradier
+tradier = Tradier(token='abc123', account_id=None, endpoint=None)
+
+# You can place multiple symbols in the call
+stocks = tradier.stock('AAPL', 'MSFT', 'GOOG')
+
+# Call a method of the stock class
+print stocks.bid()
+```
+The output is a dictionary and should look similar to this:
+```python
+{AAPL: 145.93, MSFT: 70.11, GOOG: 944.01}
+```
+#### Adding symbols
+```python
+# add two symbols to the instance but do not update
+stocks.add_symbol('AMZN', 'NFLX', update=False)
+print stocks.symbol()
+```
+Since we set `update=False`, the library does not access the Tradier API until the update function is called. Thus, the ouput only contains the symbols as before:
+```python
+{AAPL: AAPL, MSFT: MSFT, GOOG: GOOG}
+```
+
+To update the stocks, calling the `update` method will fetch the most up-to-date information from the API:
+```python
+stocks.update()
+print stocks.symbol()
+```
+```python
+# output
+{AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, AMZN: AMZN, NFLX: NFLX}
+```
+By setting `update=False`, you have more control over when your script calls the API for new information, therefore giving you control over the API limit rates. Otherwise, `update=True` is default to give you the most up to date information. 
+
+
+
+
+
+
+
+
+
+
+
+
