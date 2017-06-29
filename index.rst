@@ -214,7 +214,7 @@ Example Code
 ============
 
 Getting started
-^^^^^^^^^^^^^^^
+##############
 
 All programs will need to initalize the PyTradier class by first calling
 the ``Tradier`` class.
@@ -237,7 +237,7 @@ The output is a dictionary and should look similar to this:
     {AAPL: 145.93, MSFT: 70.11, GOOG: 944.01}
 
 Adding symbols
-^^^^^^^^^^^^^^
+##############
 
 .. code:: python
 
