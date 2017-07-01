@@ -6,25 +6,25 @@ class Option(Quote):
     def __init__(self, *symbols):
         Quote.__init__(self, *symbols)  # init the Quote and Base classes as supers
 
-    def strike(self):
-        return self._api_quote('strike')
+    def strike(self, **config):
+        return self._api_quote(attribute='strike', **config)
 
-    def expiration(self):
-        return self._api_quote('expiration_date')
+    def expiration(self, **config):
+        return self._api_quote(attribute='expiration_date', **config)
 
-    def option_type(self):
-        return self._api_quote('option_type')
+    def option_type(self, **config):
+        return self._api_quote(attribute='option_type', **config)
 
-    def expiration_type(self):
-        return self._api_quote('expiration_type')
+    def expiration_type(self, **config):
+        return self._api_quote(attribute='expiration_type', **config)
 
-    def contract_size(self):
-        return self._api_quote('contract_size')
+    def contract_size(self, **config):
+        return self._api_quote(attribute='contract_size', **config)
 
-    def underlying(self):
-        return self._api_quote('underlying')
+    def underlying(self, **config):
+        return self._api_quote(attribute='underlying', **config)
 
-    def open_interest(self):
-        return self._api_quote('open_interest')
+    def open_interest(self, **config):
+        return self._api_quote(attribute='open_interest', **config)
 
 
