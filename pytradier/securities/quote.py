@@ -1,4 +1,3 @@
-import os
 from ..base import Base
 from ..const import API_PATH
 
@@ -14,10 +13,10 @@ class Quote(Base):
 
         self._symbol_load = ','.join(self._symbols)
 
+        self._path = API_PATH['quotes']
         self._payload = {'symbols': self._symbol_load}
-
         self._data = self._api_response(endpoint=self._endpoint,
-                                      path=API_PATH['quotes'],
+                                      path=self._path,
                                       payload=self._payload)
 
 
@@ -48,11 +47,6 @@ class Quote(Base):
                 response_load[quote['symbol']] = quote[attribute]
 
         return response_load
-
-    def update_data(self):
-        self._data = self._api_response(endpoint=self._endpoint,
-                                         path=API_PATH['quotes'],
-                                         payload=self._payload)
 
     def add_symbols(self, *symbols, **config):
         # adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to

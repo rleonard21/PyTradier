@@ -10,18 +10,22 @@ class Base(object):
         self.__id = os.environ['API_ACCOUNT_ID']
         self._endpoint = os.environ['API_ENDPOINT']
 
+        self._path = ''
+        self._payload = ''
+        self._data = ''
+
     def _api_response(self, endpoint, path, payload):
 
-        if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}
-            raise TypeError
+        # if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}
+        #     raise TypeError
 
         headers = {"Accept": "application/json",
                    "Authorization": "Bearer " + self.__token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-        print r.url
-        print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
-        print r.content
+        # print r.url
+        # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
+        # print r.content
 
         j = json.loads(r.content)
 
@@ -35,5 +39,6 @@ class Base(object):
         raise APIException(error_type=j['fault']['detail']['errorcode'],
                            error_message=j['fault']['faultstring'])
 
-
-
+    def update_data(self):
+        self._data = self._api_response(self._endpoint, self._path, self._payload)
+        print self._data
