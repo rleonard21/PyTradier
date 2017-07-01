@@ -1,7 +1,7 @@
 from ..base import Base
 from ..const import API_PATH
 
-import datetime
+import time
 
 
 class Status(Base):
@@ -35,33 +35,18 @@ class Status(Base):
     def state(self, **config):
         return self._parse_response('state')
 
-
-
-
-
-
-
-
-    def timestamp(self, **config):  # None style defaults to returning epoch
+    def timestamp(self, **config):  # returns the timestamp of the last check
         response = self._parse_response('timestamp')
 
         if 'style' in config.keys():
             # user has specified style of time response
 
             if config['style'] is 'epoch':
-                return response  # API returns epoch by default, so return raw response time value
+                return response  # API returns Unix epoch by default, so return raw response time value
 
-
-
-            pass
-
-
+            if config['style'] is 'pretty':
+                return time.strftime('%m/%d/%Y %H:%M:%S', time.gmtime(response))
 
 
         else:
-            print 'updating'
-            self.update_data()  # updates by default, user must specify to not update from the API
-
-
-
-#  timestamp(style=something)
+            return response
