@@ -22,10 +22,6 @@ class Quote(Base):
                                       payload=self._payload)
 
 
-
-
-
-
     def _api_quote(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
 
@@ -48,8 +44,7 @@ class Quote(Base):
         else:
 
             for quote in self._data['quotes']['quote']:
-                # more than one symbol supplied, loop through each one and add the strike price of each
-                # option to the response_load dictionary
+                # more than one symbol supplied, loop through each one
 
                 response_load[quote['symbol']] = quote[attribute]
 
