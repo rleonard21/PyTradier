@@ -15,11 +15,6 @@ class Status(Base):
                                         path=self._path,
                                         payload=self._payload)
 
-
-
-
-
-
     def date(self, **config):
         return self._parse_response('date')
 
@@ -44,9 +39,8 @@ class Status(Base):
             if config['style'] is 'epoch':
                 return response  # API returns Unix epoch by default, so return raw response time value
 
-            if config['style'] is 'pretty':
-                return time.strftime('%m/%d/%Y %H:%M:%S', time.gmtime(response))
-
+            if config['style'] is 'pretty':  # useful for displaying the timestamp
+                return time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(response))
 
         else:
             return response

@@ -38,6 +38,8 @@ class Tradier:
             except KeyError:
                 raise ClientException('Given endpoint not supported.')
 
+        self.market = market.Market()
+
 
 
 
@@ -46,9 +48,6 @@ class Tradier:
 
     def company(self, symbol):
         return company.Company(symbol=symbol)
-
-    def market(self):
-        return market.Market()
 
     def order(self):
         return order.Order()
