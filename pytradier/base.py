@@ -9,8 +9,6 @@ class Base(object):
         self.__token = os.environ['API_TOKEN']
         self.__id = os.environ['API_ACCOUNT_ID']
 
-
-
     def _api_response(self, endpoint, path, payload):
 
         if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}

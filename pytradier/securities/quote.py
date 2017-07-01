@@ -17,21 +17,37 @@ class Quote(Base):
 
         self._payload = {'symbols': self._symbol_load}
 
-        self.__data = self._api_response(endpoint=self._endpoint,
+        self._data = self._api_response(endpoint=self._endpoint,
                                       path=API_PATH['quotes'],
                                       payload=self._payload)
 
-    def _api_quote(self, attribute):
+
+
+
+
+
+    def _api_quote(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
+
+        if 'update' in config.keys() and config['update'] is False:
+            # update the data if the `update` parameter is true
+            print 'not updating'
+            pass
+
+        else:
+            print 'updating'
+            self.update_data()  # updates by default, user must specify to not update from the API
+
+
         response_load = {}
 
         if len(self._symbols) is 1:
             # if there is only one symbol supplied, add it to the dictionary
-            response_load[self.__data['quotes']['quote']['symbol']] = self.__data['quotes']['quote'][attribute]
+            response_load[self._data['quotes']['quote']['symbol']] = self._data['quotes']['quote'][attribute]
 
         else:
 
-            for quote in self.__data['quotes']['quote']:
+            for quote in self._data['quotes']['quote']:
                 # more than one symbol supplied, loop through each one and add the strike price of each
                 # option to the response_load dictionary
 
@@ -40,10 +56,9 @@ class Quote(Base):
         return response_load
 
     def update_data(self):
-        self.__data = self._api_response(endpoint=self._endpoint,
+        self._data = self._api_response(endpoint=self._endpoint,
                                          path=API_PATH['quotes'],
                                          payload=self._payload)
-        # print self.__data
 
     def add_symbols(self, *symbols, **config):
         # adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to
@@ -52,84 +67,87 @@ class Quote(Base):
         for symbol in symbols:  # iterate through each new symbol
             self._symbols.append(symbol)
 
-        self._symbol_load = ','.join(self._symbols)
-        self._payload = {'symbols': self._symbol_load}
+        self._symbol_load = ','.join(self._symbols)  # change form from array to CSV: [AAPL, MSFT] -> AAPL,MSFT
+        self._payload = {'symbols': self._symbol_load}  # prepare the payload
 
-        if 'update' in config.keys() and config['update'] is True:
+        if 'update' in config.keys() and config['update'] is False:
             # update the data if the `update` parameter is true
-            self.update_data()
+            pass
 
-    def symbol(self):
-        return self._api_quote('symbol')
+        else:
+            self.update_data()  # updates by default, user must specify to not update from the API
 
-    def desc(self):
-        return self._api_quote('description')
+    def symbol(self, **config):
+        return self._api_quote(attribute='symbol', **config)  # pass the desired variable in with the settings, if used
 
-    def exchange(self):
-        return self._api_quote('exch')
+    def desc(self, **config):
+        return self._api_quote(attribute='description', **config)
 
-    def type(self):
-        return self._api_quote('type')
+    def exchange(self, **config):
+        return self._api_quote(attribute='exch', **config)
 
-    def change(self):
-        return self._api_quote('change')
+    def type(self, **config):
+        return self._api_quote(attribute='type', **config)
 
-    def change_percentage(self):
-        return self._api_quote('change_percentage')
+    def change(self, **config):
+        return self._api_quote(attribute='change', **config)
 
-    def volume(self):
-        return self._api_quote('volume')
+    def change_percentage(self, **config):
+        return self._api_quote(attribute='change_percentage', **config)
 
-    def average_volume(self):
-        return self._api_quote('average_volume')
+    def volume(self, **config):
+        return self._api_quote(attribute='volume', **config)
 
-    def last_volume(self):
-        return self._api_quote('last_volume')
+    def average_volume(self, **config):
+        return self._api_quote(attribute='average_volume', **config)
 
-    def trade_date(self):
-        return self._api_quote('trade_date')
+    def last_volume(self, **config):
+        return self._api_quote(attribute='last_volume', **config)
 
-    def open(self):
-        return self._api_quote('open')
+    def trade_date(self, **config):
+        return self._api_quote(attribute='trade_date', **config)
 
-    def high(self):
-        return self._api_quote('high')
+    def open(self, **config):
+        return self._api_quote(attribute='open', **config)
 
-    def low(self):
-        return self._api_quote('low')
+    def high(self, **config):
+        return self._api_quote(attribute='high', **config)
 
-    def close(self):
-        return self._api_quote('close')
+    def low(self, **config):
+        return self._api_quote(attribute='low', **config)
 
-    def prevclose(self):
-        return self._api_quote('prevclose')
+    def close(self, **config):
+        return self._api_quote(attribute='close', **config)
 
-    def week_52_high(self):
-        return self._api_quote('week_52_high')
+    def prevclose(self, **config):
+        return self._api_quote(attribute='prevclose', **config)
 
-    def week_52_low(self):
-        return self._api_quote('week_52_low')
+    def week_52_high(self, **config):
+        return self._api_quote(attribute='week_52_high', **config)
 
-    def bid(self):
-        return self._api_quote('bid')
+    def week_52_low(self, **config):
+        return self._api_quote(attribute='week_52_low', **config)
 
-    def bidsize(self):
-        return self._api_quote('bidsize')
+    def bid(self, **config):
+        return self._api_quote(attribute='bid', **config)
 
-    def bidexch(self):
-        return self._api_quote('bidexch')
+    def bidsize(self, **config):
+        return self._api_quote(attribute='bidsize', **config)
 
-    def bid_date(self):
-        return self._api_quote('bid_date')
+    def bidexch(self, **config):
+        return self._api_quote(attribute='bidexch', **config)
 
-    def ask(self):
-        return self._api_quote('ask')
+    def bid_date(self, **config):
+        return self._api_quote(attribute='bid_date', **config)
 
-    def asksize(self):
-        return self._api_quote('asksize')
+    def ask(self, **config):
+        return self._api_quote(attribute='ask', **config)
 
-    def askexch(self):
-        return self._api_quote('askexch')
+    def asksize(self, **config):
+        return self._api_quote(attribute='asksize', **config)
 
-    def ask_date(self):
-        return self._api_quote('ask_date')
+    def askexch(self, **config):
+        return self._api_quote(attribute='askexch', **config)
+
+    def ask_date(self, **config):
+        return self._api_quote(attribute='ask_date', **config)

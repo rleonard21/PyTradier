@@ -6,7 +6,6 @@ class Option(Quote):
     def __init__(self, *symbols):
         Quote.__init__(self, *symbols)  # init the Quote and Base classes as supers
 
-
     def strike(self):
         return self._api_quote('strike')
 
