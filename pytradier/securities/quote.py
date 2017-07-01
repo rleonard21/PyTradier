@@ -20,8 +20,9 @@ class Quote(Base):
                                       payload=self._payload)
 
 
-    def _api_quote(self, attribute, **config):
+    def _parse_response(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
+        # overrides from Base super since response must be a dictionary
 
         if 'update' in config.keys() and config['update'] is False:
             # update the data if the `update` parameter is true
@@ -66,76 +67,76 @@ class Quote(Base):
             self.update_data()  # updates by default, user must specify to not update from the API
 
     def symbol(self, **config):
-        return self._api_quote(attribute='symbol', **config)  # pass the desired variable in with the settings, if used
+        return self._parse_response(attribute='symbol', **config)  # pass the desired variable in with the settings, if used
 
     def desc(self, **config):
-        return self._api_quote(attribute='description', **config)
+        return self._parse_response(attribute='description', **config)
 
     def exchange(self, **config):
-        return self._api_quote(attribute='exch', **config)
+        return self._parse_response(attribute='exch', **config)
 
     def type(self, **config):
-        return self._api_quote(attribute='type', **config)
+        return self._parse_response(attribute='type', **config)
 
     def change(self, **config):
-        return self._api_quote(attribute='change', **config)
+        return self._parse_response(attribute='change', **config)
 
     def change_percentage(self, **config):
-        return self._api_quote(attribute='change_percentage', **config)
+        return self._parse_response(attribute='change_percentage', **config)
 
     def volume(self, **config):
-        return self._api_quote(attribute='volume', **config)
+        return self._parse_response(attribute='volume', **config)
 
     def average_volume(self, **config):
-        return self._api_quote(attribute='average_volume', **config)
+        return self._parse_response(attribute='average_volume', **config)
 
     def last_volume(self, **config):
-        return self._api_quote(attribute='last_volume', **config)
+        return self._parse_response(attribute='last_volume', **config)
 
     def trade_date(self, **config):
-        return self._api_quote(attribute='trade_date', **config)
+        return self._parse_response(attribute='trade_date', **config)
 
     def open(self, **config):
-        return self._api_quote(attribute='open', **config)
+        return self._parse_response(attribute='open', **config)
 
     def high(self, **config):
-        return self._api_quote(attribute='high', **config)
+        return self._parse_response(attribute='high', **config)
 
     def low(self, **config):
-        return self._api_quote(attribute='low', **config)
+        return self._parse_response(attribute='low', **config)
 
     def close(self, **config):
-        return self._api_quote(attribute='close', **config)
+        return self._parse_response(attribute='close', **config)
 
     def prevclose(self, **config):
-        return self._api_quote(attribute='prevclose', **config)
+        return self._parse_response(attribute='prevclose', **config)
 
     def week_52_high(self, **config):
-        return self._api_quote(attribute='week_52_high', **config)
+        return self._parse_response(attribute='week_52_high', **config)
 
     def week_52_low(self, **config):
-        return self._api_quote(attribute='week_52_low', **config)
+        return self._parse_response(attribute='week_52_low', **config)
 
     def bid(self, **config):
-        return self._api_quote(attribute='bid', **config)
+        return self._parse_response(attribute='bid', **config)
 
     def bidsize(self, **config):
-        return self._api_quote(attribute='bidsize', **config)
+        return self._parse_response(attribute='bidsize', **config)
 
     def bidexch(self, **config):
-        return self._api_quote(attribute='bidexch', **config)
+        return self._parse_response(attribute='bidexch', **config)
 
     def bid_date(self, **config):
-        return self._api_quote(attribute='bid_date', **config)
+        return self._parse_response(attribute='bid_date', **config)
 
     def ask(self, **config):
-        return self._api_quote(attribute='ask', **config)
+        return self._parse_response(attribute='ask', **config)
 
     def asksize(self, **config):
-        return self._api_quote(attribute='asksize', **config)
+        return self._parse_response(attribute='asksize', **config)
 
     def askexch(self, **config):
-        return self._api_quote(attribute='askexch', **config)
+        return self._parse_response(attribute='askexch', **config)
 
     def ask_date(self, **config):
-        return self._api_quote(attribute='ask_date', **config)
+        return self._parse_response(attribute='ask_date', **config)
