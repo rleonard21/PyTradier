@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import time
 from .exceptions import APIException
 
 class Base(object):
@@ -14,6 +15,8 @@ class Base(object):
         self._key = ''
         self._payload = ''
         self._data = {}
+
+        self.__last_updated = time.time()
 
     def _api_response(self, endpoint, path, payload):
 
@@ -42,6 +45,7 @@ class Base(object):
 
     def update_data(self):
         self._data = self._api_response(self._endpoint, self._path, self._payload)
+        self.__last_updated = time.time()  # updated the timestamp
 
 
     def _parse_response(self, attribute, **config):
@@ -57,3 +61,6 @@ class Base(object):
             self.update_data()  # updates by default, user must specify to not update from the API
 
         return self._data[self._key][attribute]
+
+    def timestamp(self):
+        return self.__last_updated
