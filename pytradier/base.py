@@ -28,7 +28,7 @@ class Base(object):
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
         # print r.url
-        # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
+        print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
         # print r.content
 
         j = json.loads(r.content)
@@ -53,11 +53,9 @@ class Base(object):
 
         if 'update' in config.keys() and config['update'] is False:
             # update the data if the `update` parameter is true
-            print 'not updating'
             pass
 
         else:
-            print 'updating'
             self.update_data()  # updates by default, user must specify to not update from the API
 
         return self._data[self._key][attribute]
