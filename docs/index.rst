@@ -15,6 +15,13 @@ Welcome to PyTradier's documentation!
    getting_started/overview
 
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Code Overview:
+
+   code_overview/overview
+
+
 
 Indices and tables
 ==================
