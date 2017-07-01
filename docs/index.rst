@@ -12,7 +12,10 @@ Welcome to PyTradier's documentation!
    :maxdepth: 1
    :caption: Getting Started:
 
-   getting_started/overview
+   getting_started/disclaimer
+   getting_started/installing
+   getting_started/auth
+   getting_started/quick_start
 
 
 .. toctree::
