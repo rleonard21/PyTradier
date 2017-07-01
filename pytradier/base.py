@@ -8,6 +8,7 @@ class Base(object):
     def __init__(self):
         self.__token = os.environ['API_TOKEN']
         self.__id = os.environ['API_ACCOUNT_ID']
+        self._endpoint = os.environ['API_ENDPOINT']
 
     def _api_response(self, endpoint, path, payload):
 

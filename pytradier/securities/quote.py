@@ -7,7 +7,6 @@ class Quote(Base):
     def __init__(self, *symbols):
         Base.__init__(self)
 
-        self._endpoint = os.environ['API_ENDPOINT']
         self._symbols = []
 
         for symbol in symbols:
