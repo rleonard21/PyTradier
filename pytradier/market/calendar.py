@@ -34,14 +34,14 @@ class Calendar(Base):
 
         response_load = {}
 
-        for date in self._data['calendar']['days']['day']:
+        for response in self._data['calendar']['days']['day']:
             # more than one symbol supplied, loop through each one
-            if attribute in date.keys():
-                response_load[date['date']] = date[attribute]
+            if attribute in response.keys():
+                response_load[response['date']] = response[attribute]
 
             else:
                 # this ensures that days when market is closed return None type if a market attribute is called.
-                response_load[date['date']] = None
+                response_load[response['date']] = None
 
         return response_load
 

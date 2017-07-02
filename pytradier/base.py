@@ -27,11 +27,12 @@ class Base(object):
                    "Authorization": "Bearer " + self.__token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-        # print r.url
-        print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
-        # print r.content
+        print r.url
+        # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
+        print r.content
 
         j = json.loads(r.content)
+        # print j
 
         try:
             j['fault']  # see if there is a fault message in the API response

@@ -11,8 +11,8 @@ class Market:
     def calendar(self, month=None, year=None):
         return Calendar(month, year)
 
-    def lookup(self):
-        return Lookup()
+    def lookup(self, **query):
+        return Lookup(**query)
 
     def search(self):
         return Search()
