@@ -22,7 +22,12 @@ Welcome to PyTradier's documentation!
    :maxdepth: 1
    :caption: Code Overview:
 
-   code_overview/overview
+   code_overview/account
+   code_overview/user
+   code_overview/market
+   code_overview/company
+   code_overview/order
+   code_overview/securities
 
 
 
