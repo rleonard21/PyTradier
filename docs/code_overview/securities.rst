@@ -2,7 +2,7 @@ Securities
 ==========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Securities
 
    code_overview/securities/options.rst
