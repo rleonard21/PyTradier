@@ -10,7 +10,7 @@ Welcome to PyTradier's documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: Getting Started:
+   :caption: Getting Started
 
    getting_started/disclaimer
    getting_started/installing
@@ -20,7 +20,7 @@ Welcome to PyTradier's documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: Code Overview:
+   :caption: Code Overview
 
    code_overview/account
    code_overview/user
