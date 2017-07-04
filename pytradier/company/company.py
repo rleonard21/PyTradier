@@ -7,6 +7,7 @@
 # from stats import Stats
 from chain import Chain
 from history import History
+from timesales import TimeSales
 
 class Company:
     def __init__(self, symbol):
@@ -18,6 +19,9 @@ class Company:
 
     def history(self, interval=None, start=None, end=None):
         return History(self._symbol, interval, start, end)
+
+    def timesales(self, interval=None, start=None, end=None, sfilter=None):
+        return TimeSales(self._symbol, interval, start, end, sfilter)
 
 
 
