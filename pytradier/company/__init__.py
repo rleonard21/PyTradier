@@ -2,6 +2,7 @@ from action import Action
 from calendar import Calendar
 from chain import Chain
 from dividend import Dividend
+from history import History
 from info import Info
 from ratio import Ratio
 from report import Report

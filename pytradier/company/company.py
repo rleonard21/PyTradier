@@ -6,6 +6,7 @@
 # from report import Report
 # from stats import Stats
 from chain import Chain
+from history import History
 
 class Company:
     def __init__(self, symbol):
@@ -14,6 +15,9 @@ class Company:
 
     def chain(self, expiration):
         return Chain(self._symbol, expiration)
+
+    def history(self, interval=None, start=None, end=None):
+        return History(self._symbol, interval, start, end)
 
 
 
