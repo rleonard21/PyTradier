@@ -12,7 +12,8 @@ class Base(object):
         self._endpoint = os.environ['API_ENDPOINT']
 
         self._path = ''
-        self._key = ''
+        self._key = {}
+        self._inner_key = ''
         self._payload = ''
         self._data = {}
 
@@ -27,7 +28,8 @@ class Base(object):
                    "Authorization": "Bearer " + self.__token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-        # print r.url
+        print r.url
+        print r.headers
         # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
         # print r.content
 
@@ -51,6 +53,7 @@ class Base(object):
 
     def _parse_response(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
+        # overrides from Base super since response must be a dictionary
 
         if 'update' in config.keys() and config['update'] is False:
             # update the data if the `update` parameter is true
@@ -59,7 +62,19 @@ class Base(object):
         else:
             self.update_data()  # updates by default, user must specify to not update from the API
 
-        return self._data[self._key][attribute]
+
+        response_load = {}
+
+        for response in self._key:
+            # more than one symbol supplied, loop through each one
+            if attribute in response.keys():
+                response_load[response[self._inner_key]] = response[attribute]
+
+            else:
+                # this ensures that days when market is closed return None type if a market attribute is called.
+                response_load[response[self._inner_key]] = None
+
+        return response_load
 
     def timestamp(self):
         return self.__last_updated
