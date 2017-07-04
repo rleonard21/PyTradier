@@ -5,39 +5,15 @@
 # from ratio import Ratio
 # from report import Report
 # from stats import Stats
-
-from ..securities.option import Option
-from ..securities.stock import Stock
-
+from chain import Chain
 
 class Company:
     def __init__(self, symbol):
-        self.__symbol = symbol
+        self._symbol = symbol
 
 
-    # def stock(self):
-    #     # Returns an instance of the stock class and uses the same ticker from the company
-    #
-    #     return securities.Stock(self.__symbol)
-    #
-    # def option(self, *symbols):
-    #     # returns instance of option class and requires an Option symbol and the expiration for the option
-    #     # both of these can be found using the chain() function: Company.chain()
-    #     # for example:  Company.option('SPY140627C00195500')
-    #
-    #     return securities.Option(*symbols)
-    #
-    #
-
-
-    def chain(self):
-        pass
-
-    def strikes(self):
-        pass
-
-    def expirations(self):
-        pass
+    def chain(self, expiration):
+        return Chain(self._symbol, expiration)
 
 
 
