@@ -14,8 +14,8 @@ class Market:
     def lookup(self, **query):
         return Lookup(**query)
 
-    def search(self):
-        return Search()
+    def search(self, **query):
+        return Search(**query)
 
     def status(self):
         return Status()
