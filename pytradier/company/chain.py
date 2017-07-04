@@ -23,23 +23,23 @@ class Chain(Base):
         self._inner_key = 'symbol'
 
 
-    def symbol(self):
-        return self._parse_response(attribute='symbol', update=False)
+    def symbol(self, **config):
+        return self._parse_response(attribute='symbol', **config)
 
-    def strike(self):
-        return self._parse_response(attribute='strike', update=False)
+    def strike(self, **config):
+        return self._parse_response(attribute='strike', **config)
 
-    def last(self):
-        return self._parse_response(attribute='last', update=False)
+    def last(self, **config):
+        return self._parse_response(attribute='last', **config)
 
-    def bid(self):
-        return self._parse_response(attribute='bid', update=False)
+    def bid(self, **config):
+        return self._parse_response(attribute='bid', **config)
 
-    def ask(self):
-        return self._parse_response(attribute='ask', update=False)
+    def ask(self, **config):
+        return self._parse_response(attribute='ask', **config)
 
-    def change(self):
-        return self._parse_response(attribute='change', update=False)
+    def change(self, **config):
+        return self._parse_response(attribute='change', **config)
 
-    def interest(self):
-        return self._parse_response(attribute='open_interest', update=False)
+    def interest(self, **config):
+        return self._parse_response(attribute='open_interest', **config)
