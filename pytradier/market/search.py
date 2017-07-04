@@ -19,7 +19,6 @@ class Search(Base):
                                         path=self._path,
                                         payload=self._payload)
 
-
     def _parse_response(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
         # overrides from Base super since response must be a dictionary
@@ -37,8 +36,20 @@ class Search(Base):
             # more than one symbol in response, loop through each one
 
             response_load[response['symbol']] = response[attribute]
-            print response
 
-        print response_load
+        return response_load
+
+    def symbol(self, **config):
+        return self._parse_response(attribute='symbol', **config)
+
+    def exchange(self, **config):
+        return self._parse_response(attribute='exchange', **config)
+
+    def type(self, **config):
+        return self._parse_response(attribute='type', **config)
+
+    def desc(self, **config):
+        return self._parse_response(attribute='description', **config)
+
 
 
