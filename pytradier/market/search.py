@@ -19,25 +19,8 @@ class Search(Base):
                                         path=self._path,
                                         payload=self._payload)
 
-    def _parse_response(self, attribute, **config):
-        # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
-        # overrides from Base super since response must be a dictionary
-
-        if 'update' in config.keys() and config['update'] is False:
-            # update the data if the `update` parameter is true
-            pass
-
-        else:
-            self.update_data()  # updates by default, user must specify to not update from the API
-
-        response_load = {}
-
-        for response in self._data['securities']['security']:
-            # more than one symbol in response, loop through each one
-
-            response_load[response['symbol']] = response[attribute]
-
-        return response_load
+        self._key = self._data['securities']['security']
+        self._inner_key = 'symbol'
 
     def symbol(self, **config):
         return self._parse_response(attribute='symbol', **config)
