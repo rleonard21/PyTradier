@@ -6,7 +6,8 @@ Market Calendar
 
 
 
-
+Examples
+~~~~~~~~
 .. code-block:: python
 
    calendar = tradier.market.calendar()
