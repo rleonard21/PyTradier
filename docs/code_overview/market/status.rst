@@ -1,5 +1,5 @@
 Market Status
 =============
 
-Coming soon!
-
+.. autoclass:: pytradier.market.Calendar
+    :members:
