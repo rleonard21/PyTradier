@@ -27,6 +27,7 @@ The ``open()`` function (as well as ``premarket()`` and ``postmarket()``) return
        print calendar.open()[key]  # loop through each nested dictionary
       
 The (shortened) output of this is as follows:
+
 .. code-block:: python
 
      None
