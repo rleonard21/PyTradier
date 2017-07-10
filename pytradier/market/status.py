@@ -52,7 +52,7 @@ class Status(Base):
     def timestamp(self, **config):  # returns the timestamp of the last check
         """ Returns the timestamp of the status update. 
             
-            The default style is Unix Epoch time, though using ``style='pretty'`` returns the time in ``YYYY-MM-DD H:M:S`
+            The default style is Unix Epoch time, though using ``style='pretty'`` returns the time in ``YYYY-MM-DD H:M:S``
         """
         response = self._parse_response('timestamp', **config)
 
