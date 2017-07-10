@@ -42,17 +42,17 @@ class Calendar(Base):
         """ Returns a short description of the date. """
         return self._parse_response(attribute='description', **config)
 
-    def premarket(self, **config):
-        """ Returns the interval time for the premarket. Returns ``NoneType`` if there isn't a 
-            premarket (i.e. Sunday, etc.). """
-        return self._parse_response(attribute='premarket', **config)
-
     def open(self, **config):
-        """ Returns the interval the market is open. Returns ``NoneType`` if there isn't a 
+        """ Returns a dictionary of the interval the market is open. Returns ``NoneType`` if there isn't a 
                     premarket (i.e. Sunday, etc.). """
         return self._parse_response(attribute='open', **config)
 
+    def premarket(self, **config):
+        """ Returns a dictionary of the interval time for the premarket. Returns ``NoneType`` if there isn't a 
+            premarket (i.e. Sunday, etc.). """
+        return self._parse_response(attribute='premarket', **config)
+
     def postmarket(self, **config):
-        """ Returns the interval time for postmarket. Returns ``NoneType`` if there isn't a 
+        """ Returns a dictionary of the interval time for postmarket. Returns ``NoneType`` if there isn't a 
                     premarket (i.e. Sunday, etc.). """
         return self._parse_response(attribute='postmarket', **config)
