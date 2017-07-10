@@ -23,6 +23,7 @@ class Calendar(Base):
         self._inner_key = 'date'
 
     def month(self, **config):
+        """ Retrieve the month of the calendar. """
         return self._data['calendar']['month']
 
     def year(self, **config):
