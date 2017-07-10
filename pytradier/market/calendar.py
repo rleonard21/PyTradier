@@ -27,28 +27,32 @@ class Calendar(Base):
         return self._data['calendar']['month']
 
     def year(self, **config):
+        """ Retrieve the year of the calendar. """
         return self._data['calendar']['year']
 
     def date(self, **config):
+        """ Return the date in the format YYYY-MM-DD. """
         return self._parse_response(attribute='date', **config)
 
     def status(self, **config):
+        """ Get the status of the market. """
         return self._parse_response(attribute='status', **config)
 
     def desc(self, **config):
+        """ Returns a short description of the date. """
         return self._parse_response(attribute='description', **config)
 
     def premarket(self, **config):
+        """ Returns the interval time for the premarket. Returns ``NoneType`` if there isn't a 
+            premarket (i.e. Sunday, etc.). """
         return self._parse_response(attribute='premarket', **config)
 
     def open(self, **config):
+        """ Returns the interval the market is open. Returns ``NoneType`` if there isn't a 
+                    premarket (i.e. Sunday, etc.). """
         return self._parse_response(attribute='open', **config)
 
     def postmarket(self, **config):
+        """ Returns the interval time for postmarket. Returns ``NoneType`` if there isn't a 
+                    premarket (i.e. Sunday, etc.). """
         return self._parse_response(attribute='postmarket', **config)
-
-    def start(self, **config):
-        pass  # return self._parse_response(attribute='start', **config)
-
-    def end(self, **config):
-        pass  #return self._parse_response(attribute='end', **config)
