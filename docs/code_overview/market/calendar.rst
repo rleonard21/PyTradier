@@ -6,7 +6,7 @@ Market Calendar
 The Calendar class gives you access to information regarding the market status on any given day. 
 
 
-   .. method:: month()
+   .. function:: month()
    Retrieve the month of the calendar
 
    .. method:: year()
