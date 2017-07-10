@@ -3,7 +3,7 @@ from ..const import API_PATH
 from ..base import Base
 
 class Calendar(Base):
-    """ A class for obtaining information about the market, including searching for companies and the market status.  
+    """A class for obtaining information about the market, including searching for companies and the market status.  
         
     .. note::
         The output of each method is a dictionary with a date as the key and the particular 
@@ -12,7 +12,7 @@ class Calendar(Base):
     """
 
     def __init__(self, month=None, year=None):
-        """ Create an instance of the Calendar class. 
+        """Create an instance of the Calendar class. 
         
         :param month: Month of the calendar requested.
         :param year: Year of the calendar requested.
