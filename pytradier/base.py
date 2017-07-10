@@ -28,7 +28,7 @@ class Base(object):
                    "Authorization": "Bearer " + self.__token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-        print r.url
+        # print r.url
         # print r.headers
         # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
         # print r.content
@@ -66,7 +66,6 @@ class Base(object):
         response_load = {}
 
         for response in self._key:
-            print response
             # more than one symbol supplied, loop through each one
             if attribute in response.keys():
                 response_load[response[self._inner_key]] = response[attribute]
