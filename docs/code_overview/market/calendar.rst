@@ -1,4 +1,5 @@
-Calendar
-========
+Market Calendar
+===============
 
-Coming soon!
+.. autoclass:: pytradier.market.Calendar
+   :inherited-members:
