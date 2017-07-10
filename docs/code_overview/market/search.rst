@@ -1,4 +1,5 @@
 Company Search
 ==============
 
-Coming soon!
+.. autoclass:: pytradier.market.Search
+    :members:
