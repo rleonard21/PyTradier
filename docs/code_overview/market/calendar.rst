@@ -10,6 +10,7 @@ Examples
 ~~~~~~~~
 
 .. code-block:: python
+
     # Retrieve a dictionary of the market open intervals
     calendar = tradier.market.calendar()
     print calendar.open()  
