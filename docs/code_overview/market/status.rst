@@ -1,5 +1,5 @@
 Market Status
 =============
 
-.. autoclass:: pytradier.market.Calendar
+.. autoclass:: pytradier.market.Status
     :members:
