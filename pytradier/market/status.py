@@ -5,6 +5,7 @@ import time
 
 
 class Status(Base):
+    """ A class for the current market status """
     def __init__(self):
         Base.__init__(self)
 
@@ -29,21 +30,30 @@ class Status(Base):
 
 
     def date(self, **config):
+        """ An ISO representation of the date in YYYY-MM-DD. """
         return self._parse_response('date', **config)
 
     def desc(self, **config):
+        """ A short description of the market status. """
         return self._parse_response('description', **config)
 
     def next_change(self, **config):
+        """ Returns the time of next state change. """
         return self._parse_response('next_change', **config)
 
     def next_state(self, **config):
+        """ Returns the next state of the market (i.e. premarket, postmarket, etc.) """
         return self._parse_response('next_state', **config)
 
     def state(self, **config):
+        """ Returns the current state of the market. """
         return self._parse_response('state', **config)
 
     def timestamp(self, **config):  # returns the timestamp of the last check
+        """ Returns the timestamp of the status update. 
+            
+            The default style is Unix Epoch time, though using ``style='pretty'`` returns the time in ``YYYY-MM-DD H:M:S`
+        """
         response = self._parse_response('timestamp', **config)
 
         if 'style' in config.keys():
