@@ -1,17 +1,11 @@
 Market Calendar
 ===============
 
-A class for obtaining information about the market, including searching for companies and the market status. 
-
-.. note::
-   The output of each method is a dictionary with a date as the key and the particular value of the method as the value.
-
 .. autoclass:: pytradier.market.Calendar
     :members:
 
 
-Examples
-========
+
 
 .. code-block:: python
 
