@@ -59,7 +59,7 @@ class Quote(Base):
             stocks = tradier.Stock('AAPL', 'MSFT')  # create instance of the Stock class
             print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT}
             
-            stocks.add_sumbols('GOOG', 'TSLA')
+            stocks.add_symbols('GOOG', 'TSLA')
             print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, TSLA: TSLA}
             
         """
