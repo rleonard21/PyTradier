@@ -17,11 +17,16 @@ class Calendar(Base):
         :param month: Month of the calendar requested.
         :param year: Year of the calendar requested.
         
-        Both `month` and `year` can be provided. For example:
+        Either one or both of ``month`` and ``year`` can be provided. The fetched calendar will only be as
+        specific as you request. For example:
         
         .. code-block:: python
             
-            calendar = tradier.market.calendar(month=12, year=2016)
+            calendar1 = tradier.market.calendar(month=12, year=2016)
+            calendar2 = tradier.market.calendar(year=2017)
+        
+        ``calendar1`` will return a calendar of only December, 2016. ``calendar2``, on the other hand, will
+        return a calendar for all of 2017. Future dates are also accepted.
         
         """
         Base.__init__(self)
