@@ -5,7 +5,7 @@ import time
 
 
 class Status(Base):
-    """ A class for the current market status """
+    """ A class for the current market status that retrieves the intraday status of the current market. """
     def __init__(self):
         Base.__init__(self)
 
@@ -67,3 +67,7 @@ class Status(Base):
 
         else:
             return response
+
+        
+"""  """        
+
