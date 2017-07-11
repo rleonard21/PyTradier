@@ -3,7 +3,7 @@ from ..const import API_PATH
 from ..base import Base
 
 class Calendar(Base):
-    """A class for obtaining information about the market, including searching for companies and the market status.  
+    """A class for obtaining dates and times for the market, handling both past and future dates.   
         
     .. note::
         The output of each method is a dictionary with a date as the key and the particular 
