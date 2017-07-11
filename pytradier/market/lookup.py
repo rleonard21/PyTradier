@@ -2,7 +2,7 @@ from ..base import Base
 from ..const import API_PATH
 
 class Lookup(Base):
-    """ A class for looking up symbols or partial symbols. The results are ordered by highest volume. 
+    """ A class for looking up symbols or partial symbols. The results are listed by highest volume. 
     The results are a dictionary with the symbol as the key and the information from each method as the value. 
     """
     def __init__(self, **query):
@@ -55,6 +55,9 @@ class Lookup(Base):
         .. code-block:: python
         
             tradier.market.lookup(symbol='AAPL').exchange()
+            
+        .. note::
+            Exchanges are returned as symbols according to Tradier's naming system of exchanges. 
         """
         return self._parse_response(attribute='exchange', **config)
 
