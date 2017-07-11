@@ -57,6 +57,7 @@ class Lookup(Base):
             tradier.market.lookup(symbol='AAPL').exchange()
             
         .. note::
+        
             Exchanges are returned as symbols according to Tradier's naming system of exchanges. 
         """
         return self._parse_response(attribute='exchange', **config)
