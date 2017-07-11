@@ -9,3 +9,16 @@ The securities directory is an easy way to access market data for stocks and opt
 
    securities/options.rst
    securities/stocks.rst
+   
+  
+  
+Stocks
+~~~~~~
+.. autoclass:: pytradier.securities.Stock
+   :inherited-members:
+
+
+Options
+~~~~~~~
+.. autoclass:: pytradier.securities.Option
+   :members:
