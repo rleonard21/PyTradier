@@ -12,8 +12,8 @@ class Calendar(Base):
     """
 
     def __init__(self, month=None, year=None):
-        """Create an instance of the Calendar class. """
-        '''
+        """Create an instance of the Calendar class.
+        
         :param month: Month of the calendar requested.
         :param year: Year of the calendar requested.
         
@@ -23,7 +23,7 @@ class Calendar(Base):
             
             calendar = tradier.market.calendar(month=12, year=2016)
         
-        '''
+        """
         Base.__init__(self)
 
         self._payload = {}
