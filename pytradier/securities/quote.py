@@ -84,11 +84,17 @@ class Quote(Base):
         return self._parse_response(attribute='symbol', **config)  # pass the desired variable in with the settings, if used
 
     def desc(self, **config):
-        """ Return a short description for each key. """
+        """ Return a short description for each symbol. """
         return self._parse_response(attribute='description', **config)
 
     def exchange(self, **config):
-        """ Return the exchange on which the symbol is traded. """
+        """ Return the exchange on which the symbol is traded. 
+        
+        .. note::
+        
+            This returns a symbol according to Tradier's exchange codes
+        
+        """
         # TODO: config option to return symbol name (NYSE, NASDAQ, etc.) or Tradier symbol (A, B, C, etc.)
         return self._parse_response(attribute='exch', **config)
 
@@ -156,7 +162,13 @@ class Quote(Base):
         return self._parse_response(attribute='bidsize', **config)
 
     def bidexch(self, **config):
-        """ Return the exchange of the current bid. """
+        """ Return the exchange of the current bid. 
+        
+         .. note::
+        
+            This returns a symbol according to Tradier's exchange codes
+            
+        """
         return self._parse_response(attribute='bidexch', **config)
 
     def bid_date(self, **config):
@@ -172,7 +184,13 @@ class Quote(Base):
         return self._parse_response(attribute='asksize', **config)
 
     def askexch(self, **config):
-        """ Return the exchange of the current ask. """
+        """ Return the exchange of the current ask. 
+        
+         .. note::
+        
+            This returns a symbol according to Tradier's exchange codes
+        
+        """
         return self._parse_response(attribute='askexch', **config)
 
     def ask_date(self, **config):
