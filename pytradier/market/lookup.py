@@ -16,7 +16,7 @@ class Lookup(Base):
         stored in the instance of the class, which allows for the local storage of results rather than having to call to the API
         for each piece of information. 
         
-        This gives you a wide range of abilities. For example, to retrieve `every` stock on the NYSE, use the argument ``exchange=A``
+        This gives you a wide range of abilities. For example, to retrieve `every` stock on the NYSE, use the argument ``exchange='A'``
         ('A' is the Tradier exchange code for NYSE), and ignore the other parameters:
         
         .. code-block:: python
