@@ -5,6 +5,25 @@ class Option(Quote):
     """ A class for fetching and storing market data for options. """
     
     def __init__(self, *symbols):
+        """ Create an instance of the Option class. 
+        
+        :param symbols: The symbol(s) of the options contract(s) to track. 
+        
+        One or more standard symbols can be used to create in instance:
+        
+        .. code-block:: python
+        
+            options = tradier.Option('TSLA170707C00295000', 'F170714C00010500')
+            print options.underlying()
+        
+        The result is a dictionary:
+        
+        .. code-block:: python
+        
+            {TSLA: TSLA, F:F}
+        
+        
+        """
         Quote.__init__(self, *symbols)  # init the Quote and Base classes as supers
 
     def strike(self, **config):
