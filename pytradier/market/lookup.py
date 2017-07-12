@@ -24,11 +24,11 @@ class Lookup(Base):
             nyse = tradier.market.lookup(exchange='A')
             print nyse.symbol
         
-        And the result is a long dictionary, sorted alphabetically:
+        And the result is a long dictionary, sorted by largest volume:
         
         .. code-block:: python
         
-            {A: A, AA: AA, AAC: AAC, AAN: AAN, AAP: AAP, ... , ZX: ZX, ZYME: ZYME}
+            {BAC: BAC, TWTR: TWTR, RAD: RAD, ... }
         
         
         
