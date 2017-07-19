@@ -7,6 +7,7 @@ from info import Info
 from ratio import Ratio
 from report import Report
 from stats import Stats
+from timesales import TimeSales
 
 
 # from securities.stock import Stock
