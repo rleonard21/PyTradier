@@ -8,7 +8,7 @@ class History(Base):
         
         :param symbol: The requested company symbol. By default, the parent ``Company`` class symbol is passed to this method. 
         :param interval: Interval of time for the requested data set. Defaults to ``'daily'``, but can also take ``weekly`` and ``monthly``.
-        For example, if the interval is set to ``'monthly'``, then each piece of data represents one month. A smaller interval has more data. `Optional.` 
+            For example, if the interval is set to ``'monthly'``, then each piece of data represents one month. A smaller interval has more data. `Optional.` 
         :param start: The start date of the data set in the format ``YYYY-MM-DD``. `Optional.`
         :param end: The end date of the data set in the format ``YYYY-MM-DD``. `Optional.`
         
