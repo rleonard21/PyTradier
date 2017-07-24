@@ -57,7 +57,7 @@ class Lookup(Base):
 
     def symbol(self, **config):
         """ Return the symbol from the search. 
-        |For example:
+        | For example:
         
         .. code-block:: python
         
@@ -67,7 +67,7 @@ class Lookup(Base):
 
     def exchange(self, **config):
         """ Return the exchange of the symbol. 
-        |For example:
+        | For example:
         
         .. code-block:: python
         
@@ -81,7 +81,7 @@ class Lookup(Base):
 
     def type(self, **config):
         """ Return the type of symbol (``stock``, ``etf``, ``index``). 
-        |For example:
+        | For example:
         
         .. code-block:: python
         
@@ -92,7 +92,7 @@ class Lookup(Base):
 
     def desc(self, **config):
         """ Return a short description of the symbol. 
-        |For example:
+        | For example:
         
         .. code-block:: python
         
