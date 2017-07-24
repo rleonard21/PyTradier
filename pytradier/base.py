@@ -78,3 +78,14 @@ class Base(object):
 
     def timestamp(self):
         return self.__last_updated
+    
+    def _data(**config):
+        """ Return the large, unorganized and unsorted data before PyTradier parses it. """
+        return self._parse_response(**config)
+        
+        
+        
+        
+        
+        
+        
