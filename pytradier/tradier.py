@@ -72,11 +72,12 @@ class Tradier:
         return account.Account()
 
     def company(self, symbol):
-        """ Provide an instance of ``company``. """
+        """ Provide an instance of ``company``. This is for accessing information about a company, including historical pricing
+        for their stock. """
         return company.Company(symbol=symbol)
 
     def order(self):
-        """ Provide an instance of ``order``. """
+        """ Provide an instance of ``order``. This is the class in which trading takes place. """
         return order.Order()
 
     def stock(self, *symbols):
