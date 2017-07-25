@@ -7,6 +7,7 @@ from .exceptions import APIException
 class Base(object):
 
     def __init__(self):
+        """ Create an instance of the Base class. """
         self.__token = os.environ['API_TOKEN']
         self.__id = os.environ['API_ACCOUNT_ID']
         self._endpoint = os.environ['API_ENDPOINT']
@@ -20,10 +21,20 @@ class Base(object):
         self.__last_updated = time.time()
 
     def _api_response(self, endpoint, path, payload):
-
-        # if not isinstance(payload, dict):  # payload must be in format payload={'hello': 'world'}
-        #     raise TypeError
-
+        """ Retrieve the requested data from Tradier. This is the main function called by other classes to retrieve information.
+        
+        :param endpoint: The desired endpoint. By default, this is passed in from the intialization of the ``Tradier`` class.
+            Accepts ``'sandbox'`` or ``'api'``.
+        :param path: The API path to information. By default, this is passed in from the inheriting class's endpoint. Endpoints
+            are in the form ``/v1/markets/quotes``.
+        :param payload: A dictionary of the information required to send to Tradier for API calls. For example, the Market Data endpoint
+            requires ``{symbols: 'TSLA'}``.
+        
+        In general, this class shouldn't be accessed directly by the developer. Most classes inherit from Base and pass information
+        in such as ``path``, ``endpoint``, and ``payload``.
+        
+        """
+        
         headers = {"Accept": "application/json",
                    "Authorization": "Bearer " + self.__token}
 
