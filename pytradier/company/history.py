@@ -44,25 +44,31 @@ class History(Base):
         self._inner_key = 'date'
 
 
-    def date(self):
+    def date(self, **config):
         """ Return the date in ISO format ``YYYY-MM-DD``. """
-        return self._parse_response(attribute='date', update=False)
+        return self._parse_response(attribute='date', **config)
 
-    def open(self):
-        """ Return the opening price for the interval. """
-        return self._parse_response(attribute='open', update=False)
+    def open(self, **config):
+        """ Return the opening price for the interval. For example, is interval is ``daily``, the open
+            price will be the price at market open, and the closing price is the price at market close. 
+        """
+        return self._parse_response(attribute='open', **config)
+    
+    def close(self, **config):
+        """ Return the closing price for the interval. """
+        return self._parse_response(attribute='close', **config)
 
-    def high(self):
+    def high(self, **config):
         """ Return the highest price from the interval. """
-        return self._parse_response(attribute='high', update=False)
+        return self._parse_response(attribute='high', **config)
 
-    def low(self):
+    def low(self, **config):
         """ Return the lowest point from the interval. """
         return self._parse_response(attribute='low', update=False)
 
-    def volume(self):
+    def volume(self, **config):
         """ Return the total volume for the interval. """
-        return self._parse_response(attribute='volume', update=False)
+        return self._parse_response(attribute='volume', **config)
 
 
 
