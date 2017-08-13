@@ -1,17 +1,19 @@
 from ..base import Base
+from .account_helper import AccountHelper
+
 from ..const import API_PATH
 from ..const import API_ENDPOINT
 import os
 from ..exceptions import ClientException
 
-class Balance(Base):
+class Balance(Base, AccountHelper):
     def __init__(self):
         Base.__init__(self)
+        AccountHelper.__init__(self, endpoint=self._endpoint)
 
         if self._endpoint is not API_ENDPOINT['brokerage']:
             raise ClientException('Bad Endpoint: account paths require the full API (no sandbox!)')
 
-        self._payload = {}
         self._path = API_PATH['account']
         self._path += os.environ['API_ACCOUNT_ID'] + '/balances'
 
