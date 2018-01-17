@@ -73,7 +73,6 @@ class Base(object):
         else:
             self.update_data()  # updates by default, user must specify to not update from the API
 
-
         response_load = {}
 
         for response in self._key:
@@ -93,10 +92,4 @@ class Base(object):
     def _data(**config):
         """ Return the large, unorganized and unsorted data before PyTradier parses it. """
         return self._parse_response(**config)
-        
-        
-        
-        
-        
-        
         
