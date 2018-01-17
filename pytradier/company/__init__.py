@@ -1,6 +1,7 @@
 from .action import Action
 from .calendar import Calendar
 from .chain import Chain
+from .expirations import Expirations
 from .dividend import Dividend
 from .history import History
 from .info import Info

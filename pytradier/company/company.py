@@ -8,6 +8,7 @@
 from .chain import Chain
 from .history import History
 from .timesales import TimeSales
+from .expirations import Expirations
 
 class Company:
     def __init__(self, symbol):
@@ -16,6 +17,9 @@ class Company:
 
     def chain(self, expiration):
         return Chain(self._symbol, expiration)
+
+    def expirations(self):
+        return Expirations(self._symbol)
 
     def history(self, interval=None, start=None, end=None):
         return History(self._symbol, interval, start, end)
