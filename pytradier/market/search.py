@@ -8,10 +8,10 @@ class Search(Base):
 
         self._payload = {}
 
-        if 'symbol' in query.keys():
+        if 'symbol' in list(query.keys()):
             self._payload['q'] = query['symbol']
 
-        if 'indexes' in query.keys():
+        if 'indexes' in list(query.keys()):
             self._payload['indexes'] = query['type']
 
         self._path = API_PATH['search']

@@ -1,2 +1,2 @@
-from option import Option
-from stock import Stock
+from .option import Option
+from .stock import Stock

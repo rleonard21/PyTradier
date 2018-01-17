@@ -25,14 +25,14 @@ class Balance(Base, AccountHelper):
 
 
     def _parse_response(self, attribute, **config):
-        if 'update' in config.keys() and config['update'] is False:
+        if 'update' in list(config.keys()) and config['update'] is False:
             pass
 
         else:
             # update the data if the `update` parameter is true
             self.update_data()  # updates by default, user must specify to not update from the API
 
-        if 'inner' in config.keys():
+        if 'inner' in list(config.keys()):
 
             return self._data['balances'][attribute][config['inner']]
 
