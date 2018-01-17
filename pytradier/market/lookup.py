@@ -37,13 +37,13 @@ class Lookup(Base):
 
         self._payload = {}
 
-        if 'symbol' in query.keys():
+        if 'symbol' in list(query.keys()):
             self._payload['q'] = query['symbol']
 
-        if 'type' in query.keys():
+        if 'type' in list(query.keys()):
             self._payload['type'] = query['type']
 
-        if 'exchange' in query.keys():
+        if 'exchange' in list(query.keys()):
             self._payload['exchanges'] = query['exchange']
 
         self._path = API_PATH['lookup']

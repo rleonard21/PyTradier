@@ -1,9 +1,9 @@
-from balance import Balance
-from costbasis import CostBasis
-from history import History
-from orders import Orders
-from orderstatus import OrderStatus
-from positions import Positions
+from .balance import Balance
+from .costbasis import CostBasis
+from .history import History
+from .orders import Orders
+from .orderstatus import OrderStatus
+from .positions import Positions
 
 class Account:
     def __init__(self):

@@ -1,12 +1,12 @@
 
-from const import API_ENDPOINT
+from .const import API_ENDPOINT
 
 from . import company
 from . import account
 from . import order
 from . import market
 
-from securities import stock, option
+from .securities import stock, option
 
 from .exceptions import ClientException
 

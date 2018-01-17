@@ -24,7 +24,7 @@ class Quote(Base):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
         # overrides from Base super since response must be a dictionary
 
-        if 'update' in config.keys() and config['update'] is False:
+        if 'update' in list(config.keys()) and config['update'] is False:
             # update the data if the `update` parameter is true
             pass
 
@@ -72,7 +72,7 @@ class Quote(Base):
         self._symbol_load = ','.join(self._symbols)  # change form from array to CSV: [AAPL, MSFT] -> AAPL,MSFT
         self._payload = {'symbols': self._symbol_load}  # prepare the payload
 
-        if 'update' in config.keys() and config['update'] is False:
+        if 'update' in list(config.keys()) and config['update'] is False:
             # update the data if the `update` parameter is true
             pass
 

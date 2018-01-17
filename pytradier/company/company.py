@@ -5,9 +5,9 @@
 # from ratio import Ratio
 # from report import Report
 # from stats import Stats
-from chain import Chain
-from history import History
-from timesales import TimeSales
+from .chain import Chain
+from .history import History
+from .timesales import TimeSales
 
 class Company:
     def __init__(self, symbol):
