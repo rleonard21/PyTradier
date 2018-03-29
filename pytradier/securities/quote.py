@@ -164,8 +164,8 @@ class Quote(Base):
 
 	def bidexch(self, full_name=False, **config):
 		""" Return the exchange of the current bid. This will return a dictionary of each symbol and the respective
-			exchange code. The `full_name` parameter can be specified to return the name of the exchange rather
-			than the exchange code. For example:
+		exchange code. The ``full_name`` parameter can be specified to return the name of the exchange rather
+		than the exchange code. For example:
 
 		.. code-block:: python
 
@@ -208,8 +208,8 @@ class Quote(Base):
 
 	def askexch(self, full_name=False, **config):
 		""" Return the exchange of the current ask. This will return a dictionary of each symbol and the respective
-			exchange code. The `full_name` parameter can be specified to return the name of the exchange rather
-			than the exchange code. For example:
+		exchange code. The ``full_name`` parameter can be specified to return the name of the exchange rather
+		than the exchange code. For example:
 
 		.. code-block:: python
 
