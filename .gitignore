@@ -1,3 +1,4 @@
+examples/
 credentials.py
 .idea
 __pycache__
