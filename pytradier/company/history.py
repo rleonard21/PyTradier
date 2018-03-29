@@ -16,8 +16,8 @@ class History(Base):
 
 		.. note::
 
-			Each method returns a dictionary with the date as the key and the requested data as the value.
-			Dictionaries are unordered.
+			Each method (except ``bundle``) returns a dictionary with the date as the key and the requested data as the
+			value. Dictionaries are `unordered`.
 
 		"""
 		Base.__init__(self)
@@ -79,7 +79,23 @@ class History(Base):
 		:param reverse_sort: Determines the order of sorting the data. Default is False, which sorts by ascending dates.
 
 		This method can be useful for machine learning or other data handling methods since this returns a list of
-		numbers, rather than a dictionary with keys. 
+		numbers, rather than a dictionary with keys.
+
+		Example:
+
+		.. code-block:: python
+
+			company = tradier.company(symbol='AAPL')
+			history = company.history(interval='monthly', start='2011-1-1', end='2012-1-1')
+			print(history.bundle(reverse_sort=True))
+
+		The above code will output a multi-dimension list with descending dates:
+
+		.. code-block:: python
+
+			[[1325394000, 58.485714, 64.715714, 64.921429, 58.428571, 1617345800],
+			[1322715600, 54.648571, 57.857143, 58.441429, 53.954286, 1577342800], ...]
+
 		"""
 
 		bundle = []
