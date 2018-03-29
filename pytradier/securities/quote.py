@@ -1,198 +1,200 @@
 from ..base import Base
 from ..const import API_PATH
+from ..const import EXCHANGE_CODES
+
 
 class Quote(Base):
-    '''Super class for quotes'''
-    def __init__(self, *symbols):
-        Base.__init__(self)
+	# Super class for quotes
 
-        self._symbols = []
+	def __init__(self, *symbols):
+		Base.__init__(self)
 
-        for symbol in symbols:
-            self._symbols.append(symbol)
+		self._symbols = []
 
-        self._symbol_load = ','.join(self._symbols)
+		for symbol in symbols:
+			self._symbols.append(symbol)
 
-        self._path = API_PATH['quotes']
-        self._payload = {'symbols': self._symbol_load}
-        self._data = self._api_response(endpoint=self._endpoint,
-                                      path=self._path,
-                                      payload=self._payload)
+		self._symbol_load = ','.join(self._symbols)
 
+		self._path = API_PATH['quotes']
+		self._payload = {'symbols': self._symbol_load}
+		self._data = self._api_response(endpoint=self._endpoint,
+		                                path=self._path,
+		                                payload=self._payload)
 
-    def _parse_response(self, attribute, **config):
-        # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
-        # overrides from Base super since response must be a dictionary
+	def _parse_response(self, attribute, **config):
+		# returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
+		# overrides from Base super since response must be a dictionary
 
-        if 'update' in list(config.keys()) and config['update'] is False:
-            # update the data if the `update` parameter is true
-            pass
+		if 'update' in list(config.keys()) and config['update'] is False:
+			# update the data if the `update` parameter is true
+			pass
 
-        else:
-            self.update_data()  # updates by default, user must specify to not update from the API
+		else:
+			self.update_data()  # updates by default, user must specify to not update from the API
 
+		response_load = {}
 
-        response_load = {}
+		if len(self._symbols) is 1:
+			# if there is only one symbol supplied, add it to the dictionary
+			response_load[self._data['quotes']['quote']['symbol']] = self._data['quotes']['quote'][attribute]
 
-        if len(self._symbols) is 1:
-            # if there is only one symbol supplied, add it to the dictionary
-            response_load[self._data['quotes']['quote']['symbol']] = self._data['quotes']['quote'][attribute]
+		else:
 
-        else:
+			for quote in self._data['quotes']['quote']:
+				# more than one symbol supplied, loop through each one
 
-            for quote in self._data['quotes']['quote']:
-                # more than one symbol supplied, loop through each one
+				response_load[quote['symbol']] = quote[attribute]
 
-                response_load[quote['symbol']] = quote[attribute]
+		return response_load
 
-        return response_load
+	def add_symbols(self, *symbols, **config):
+		""" Add one or more symbols to the array of tracked symbols.
 
-    def add_symbols(self, *symbols, **config):
-        """ Add one or more symbols to the array of tracked symbols. 
-        
-        :param *symbols: A string containing the company's symbol. 
-        
-        Multiple symbols can be added at once:
-        
-        .. code-block:: python
-        
-            stocks = tradier.Stock('AAPL', 'MSFT')  # create instance of the Stock class
-            print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT}
-            
-            stocks.add_symbols('GOOG', 'TSLA')
-            print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, TSLA: TSLA}
-            
-        """
-        # adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to
-        # call the API for new data
+		:param symbols: A string containing the company's symbol.
 
-        for symbol in symbols:  # iterate through each new symbol
-            self._symbols.append(symbol)
+		Multiple symbols can be added at once:
 
-        self._symbol_load = ','.join(self._symbols)  # change form from array to CSV: [AAPL, MSFT] -> AAPL,MSFT
-        self._payload = {'symbols': self._symbol_load}  # prepare the payload
+		.. code-block:: python
 
-        if 'update' in list(config.keys()) and config['update'] is False:
-            # update the data if the `update` parameter is true
-            pass
+			stocks = tradier.Stock('AAPL', 'MSFT')  # create instance of the Stock class
+			print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT}
 
-        else:
-            self.update_data()  # updates by default, user must specify to not update from the API
+			stocks.add_symbols('GOOG', 'TSLA')
+			print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, TSLA: TSLA}
 
-    def symbol(self, **config):
-        """ Return the symbol of each key in the dictionary. """
-        return self._parse_response(attribute='symbol', **config)  # pass the desired variable in with the settings, if used
+		"""
+		# adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to
+		# call the API for new data
 
-    def desc(self, **config):
-        """ Return a short description for each symbol. """
-        return self._parse_response(attribute='description', **config)
+		for symbol in symbols:  # iterate through each new symbol
+			self._symbols.append(symbol)
 
-    def exchange(self, **config):
-        """ Return the exchange on which the symbol is traded. 
-        
-        .. note::
-        
-            This returns a symbol according to Tradier's exchange codes
-        
-        """
-        # TODO: config option to return symbol name (NYSE, NASDAQ, etc.) or Tradier symbol (A, B, C, etc.)
-        return self._parse_response(attribute='exch', **config)
+		self._symbol_load = ','.join(self._symbols)  # change form from array to CSV: [AAPL, MSFT] -> AAPL,MSFT
+		self._payload = {'symbols': self._symbol_load}  # prepare the payload
 
-    def type(self, **config):
-        return self._parse_response(attribute='type', **config)
+		if 'update' in list(config.keys()) and config['update'] is False:
+			# update the data if the `update` parameter is true
+			pass
 
-    def change(self, **config):
-        """ Return the dollar change. """
-        return self._parse_response(attribute='change', **config)
+		else:
+			self.update_data()  # updates by default, user must specify to not update from the API
 
-    def change_percentage(self, **config):
-        """ Return the percentage change """
-        return self._parse_response(attribute='change_percentage', **config)
+	def symbol(self, **config):
+		""" Return the symbol of each key in the dictionary. """
+		return self._parse_response(attribute='symbol',
+		                            **config)  # pass the desired variable in with the settings, if used
 
-    def volume(self, **config):
-        """ Return the volume for the day. """
-        return self._parse_response(attribute='volume', **config)
+	def desc(self, **config):
+		""" Return a short description for each symbol. """
+		return self._parse_response(attribute='description', **config)
 
-    def average_volume(self, **config):
-        """ Return the average volume. """
-        return self._parse_response(attribute='average_volume', **config)
+	def exchange(self, **config):
+		""" Return the exchange on which the symbol is traded.
 
-    def last_volume(self, **config):
-        """ Return the latest volume. """
-        return self._parse_response(attribute='last_volume', **config)
+		.. note::
 
-    def trade_date(self, **config):
-        """ Return the date and time of last trade in Unix Epoch time. """
-        return self._parse_response(attribute='trade_date', **config)
+			This returns a symbol according to Tradier's exchange codes
 
-    def open(self, **config):
-        """ Return the opening price. """
-        return self._parse_response(attribute='open', **config)
+		"""
+		# TODO: config option to return symbol name (NYSE, NASDAQ, etc.) or Tradier symbol (A, B, C, etc.)
+		return self._parse_response(attribute='exch', **config)
 
-    def high(self, **config):
-        """ Return the trading day high. """
-        return self._parse_response(attribute='high', **config)
+	def type(self, **config):
+		return self._parse_response(attribute='type', **config)
 
-    def low(self, **config):
-        """ Return the trading day low. """
-        return self._parse_response(attribute='low', **config)
+	def change(self, **config):
+		""" Return the dollar change. """
+		return self._parse_response(attribute='change', **config)
 
-    def close(self, **config):
-        """ Return the closing price. """
-        return self._parse_response(attribute='close', **config)
+	def change_percentage(self, **config):
+		""" Return the percentage change """
+		return self._parse_response(attribute='change_percentage', **config)
 
-    def prevclose(self, **config):
-        """ Return the previous closing price. """
-        return self._parse_response(attribute='prevclose', **config)
+	def volume(self, **config):
+		""" Return the volume for the day. """
+		return self._parse_response(attribute='volume', **config)
 
-    def week_52_high(self, **config):
-        """ Return the 52 week high. """
-        return self._parse_response(attribute='week_52_high', **config)
+	def average_volume(self, **config):
+		""" Return the average volume. """
+		return self._parse_response(attribute='average_volume', **config)
 
-    def week_52_low(self, **config):
-        """ Return the 52 week low. """
-        return self._parse_response(attribute='week_52_low', **config)
+	def last_volume(self, **config):
+		""" Return the latest volume. """
+		return self._parse_response(attribute='last_volume', **config)
 
-    def bid(self, **config):
-        """ Return the latest bid price. """
-        return self._parse_response(attribute='bid', **config)
+	def trade_date(self, **config):
+		""" Return the date and time of last trade in Unix Epoch time. """
+		return self._parse_response(attribute='trade_date', **config)
 
-    def bidsize(self, **config):
-        """ Return the size of the current bid. """
-        return self._parse_response(attribute='bidsize', **config)
+	def open(self, **config):
+		""" Return the opening price. """
+		return self._parse_response(attribute='open', **config)
 
-    def bidexch(self, **config):
-        """ Return the exchange of the current bid. 
-        
-         .. note::
-        
-            This returns a symbol according to Tradier's exchange codes
-            
-        """
-        return self._parse_response(attribute='bidexch', **config)
+	def high(self, **config):
+		""" Return the trading day high. """
+		return self._parse_response(attribute='high', **config)
 
-    def bid_date(self, **config):
-        """ Return the date and time of the latest bid in Unix Epoch time. """
-        return self._parse_response(attribute='bid_date', **config)
+	def low(self, **config):
+		""" Return the trading day low. """
+		return self._parse_response(attribute='low', **config)
 
-    def ask(self, **config):
-        """ Return the latest ask price. """
-        return self._parse_response(attribute='ask', **config)
+	def close(self, **config):
+		""" Return the closing price. """
+		return self._parse_response(attribute='close', **config)
 
-    def asksize(self, **config):
-        """ Return the size of the current ask. """
-        return self._parse_response(attribute='asksize', **config)
+	def prevclose(self, **config):
+		""" Return the previous closing price. """
+		return self._parse_response(attribute='prevclose', **config)
 
-    def askexch(self, **config):
-        """ Return the exchange of the current ask. 
-        
-         .. note::
-        
-            This returns a symbol according to Tradier's exchange codes
-        
-        """
-        return self._parse_response(attribute='askexch', **config)
+	def week_52_high(self, **config):
+		""" Return the 52 week high. """
+		return self._parse_response(attribute='week_52_high', **config)
 
-    def ask_date(self, **config):
-        """ Return the date and time of the latest ask in Unix Epoch time. """
-        return self._parse_response(attribute='ask_date', **config)
+	def week_52_low(self, **config):
+		""" Return the 52 week low. """
+		return self._parse_response(attribute='week_52_low', **config)
+
+	def bid(self, **config):
+		""" Return the latest bid price. """
+		return self._parse_response(attribute='bid', **config)
+
+	def bidsize(self, **config):
+		""" Return the size of the current bid. """
+		return self._parse_response(attribute='bidsize', **config)
+
+	def bidexch(self, **config):
+		""" Return the exchange of the current bid.
+
+		.. note::
+
+			This returns a symbol according to Tradier's exchange codes
+
+		"""
+		return self._parse_response(attribute='bidexch', **config)
+
+	def bid_date(self, **config):
+		""" Return the date and time of the latest bid in Unix Epoch time. """
+		return self._parse_response(attribute='bid_date', **config)
+
+	def ask(self, **config):
+		""" Return the latest ask price. """
+		return self._parse_response(attribute='ask', **config)
+
+	def asksize(self, **config):
+		""" Return the size of the current ask. """
+		return self._parse_response(attribute='asksize', **config)
+
+	def askexch(self, **config):
+		""" Return the exchange of the current ask.
+
+		.. note::
+
+			This returns a symbol according to Tradier's exchange codes
+
+		"""
+		return self._parse_response(attribute='askexch', **config)
+
+	def ask_date(self, **config):
+		""" Return the date and time of the latest ask in Unix Epoch time. """
+		return self._parse_response(attribute='ask_date', **config)
