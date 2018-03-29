@@ -1,6 +1,7 @@
 from ..base import Base
 from ..const import API_PATH
 
+
 class History(Base):
     """ A class for handling historical pricing of companies. """
     def __init__(self, symbol, interval=None, start=None, end=None):
@@ -14,7 +15,8 @@ class History(Base):
         
         .. note::
         
-            Each method returns a dictionary with the date as the key and the requested data as the value. 
+            Each method returns a dictionary with the date as the key and the requested data as the value.
+            Dictionaries are unordered.
         
         """
         Base.__init__(self)
@@ -43,7 +45,6 @@ class History(Base):
         self._key = self._data['history']['day']
         self._inner_key = 'date'
 
-
     def date(self, **config):
         """ Return the date in ISO format ``YYYY-MM-DD``. """
         return self._parse_response(attribute='date', **config)
@@ -64,11 +65,8 @@ class History(Base):
 
     def low(self, **config):
         """ Return the lowest point from the interval. """
-        return self._parse_response(attribute='low', update=False)
+        return self._parse_response(attribute='low', **config)
 
     def volume(self, **config):
         """ Return the total volume for the interval. """
         return self._parse_response(attribute='volume', **config)
-
-
-
