@@ -82,8 +82,7 @@ class Quote(Base):
 
 	def symbol(self, **config):
 		""" Return the symbol of each key in the dictionary. """
-		return self._parse_response(attribute='symbol',
-		                            **config)  # pass the desired variable in with the settings, if used
+		return self._parse_response(attribute='symbol', **config)
 
 	def desc(self, **config):
 		""" Return a short description for each symbol. """
@@ -163,15 +162,37 @@ class Quote(Base):
 		""" Return the size of the current bid. """
 		return self._parse_response(attribute='bidsize', **config)
 
-	def bidexch(self, **config):
-		""" Return the exchange of the current bid.
+	def bidexch(self, full_name=False, **config):
+		""" Return the exchange of the current bid. This will return a dictionary of each symbol and the respective
+			exchange code. The `full_name` parameter can be specified to return the name of the exchange rather
+			than the exchange code. For example:
 
-		.. note::
+		.. code-block:: python
 
-			This returns a symbol according to Tradier's exchange codes
+			stock = tradier.stock('AAPL', 'TSLA')
+			print(stock.bidexch())
+			print(stock.bidexch(full_name=True))
+
+		This will return the following dictionaries:
+
+		.. code-block:: python
+
+			{'AAPL': 'Q', 'TSLA': 'Z'}
+			{'AAPL': 'NASDAQ OMX', 'TSLA': 'BATS'}
 
 		"""
-		return self._parse_response(attribute='bidexch', **config)
+		response = self._parse_response(attribute='bidexch', **config)
+
+		if full_name is True:
+			response_payload = {}
+			for symbol in self._symbols:
+				code = response[symbol]
+				response_payload[symbol] = EXCHANGE_CODES[code]
+
+			return response_payload
+
+		else:
+			return response
 
 	def bid_date(self, **config):
 		""" Return the date and time of the latest bid in Unix Epoch time. """
@@ -185,15 +206,37 @@ class Quote(Base):
 		""" Return the size of the current ask. """
 		return self._parse_response(attribute='asksize', **config)
 
-	def askexch(self, **config):
-		""" Return the exchange of the current ask.
+	def askexch(self, full_name=False, **config):
+		""" Return the exchange of the current ask. This will return a dictionary of each symbol and the respective
+			exchange code. The `full_name` parameter can be specified to return the name of the exchange rather
+			than the exchange code. For example:
 
-		.. note::
+		.. code-block:: python
 
-			This returns a symbol according to Tradier's exchange codes
+			stock = tradier.stock('AAPL', 'TSLA')
+			print(stock.bidexch())
+			print(stock.bidexch(full_name=True))
+
+		This will return the following dictionaries:
+
+		.. code-block:: python
+
+			{'AAPL': 'Q', 'TSLA': 'Z'}
+			{'AAPL': 'NASDAQ OMX', 'TSLA': 'BATS'}
 
 		"""
-		return self._parse_response(attribute='askexch', **config)
+		response = self._parse_response(attribute='askexch', **config)
+
+		if full_name is True:
+			response_payload = {}
+			for symbol in self._symbols:
+				code = response[symbol]
+				response_payload[symbol] = EXCHANGE_CODES[code]
+
+			return response_payload
+
+		else:
+			return response
 
 	def ask_date(self, **config):
 		""" Return the date and time of the latest ask in Unix Epoch time. """
