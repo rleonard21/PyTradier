@@ -1,3 +1,4 @@
+*.ini
 examples/
 credentials.py
 .idea
