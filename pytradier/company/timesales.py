@@ -1,24 +1,21 @@
 from ..base import Base
 from ..const import API_PATH
 
+
 class TimeSales(Base):
     def __init__(self, symbol, interval=None, start=None, end=None, sfilter=None):
         """ Create an instance of the TimeSales class.
         
         :param symbol: The company symbol. By default, this is passed in from the parent ``Company`` class. 
-        :param interval: The time interval between each sale. Options include ``'tick'``, ``'1min'``, ``'5min'``, and ``'15min'``. `Optional.`
+        :param interval: The time interval between each sale. Options include ``'tick'``, ``'1min'``, ``'5min'``,
+        and ``'15min'``. `Optional.`
         :param start: Start datetime for timesales range represented as ``YYYY-MM-DD HH:MM``. `Optional`.
         :param end: End date for timesales range represented as ``YYYY-MM-DD HH:MM``. `Optional`.
-        :param sfilter: The session conditions to requetst data for. Defaults to ``'all'`` for all available data points.
-                        Use ``'open'`` for data points within open market hours only. `Optional.`
-        
-        
-        
-        
+        :param sfilter: The session conditions to requetst data for. Defaults to ``'all'`` for all available data
+        points. Use ``'open'`` for data points within open market hours only. `Optional.`
+
         """
-        
-        
-        
+
         Base.__init__(self)
 
         self._symbol = symbol
@@ -49,15 +46,14 @@ class TimeSales(Base):
         self._key = self._data['series']['data']
         self._inner_key = 'time'
 
-
     def time(self, **config):
         """ Return the time of the data. """
         return self._parse_response(attribute='time', **config)
 
     def open(self, **config):
         """ Return the price of the start of the data interval. For example, if ``interval`` was set to ``'15min'``, 
-            the opening price for that interval would the from the start of the 15 minute interval, and the closing price
-            would be from the end of the interval. """
+            the opening price for that interval would the from the start of the 15 minute interval, and the closing
+            price would be from the end of the interval. """
         return self._parse_response(attribute='open', **config)
 
     def close(self, **config):
@@ -75,6 +71,3 @@ class TimeSales(Base):
     def volume(self, **config):
         """ Return the total volume of the interval. """
         return self._parse_response(attribute='volume', **config)
-
-
-

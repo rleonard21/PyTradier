@@ -18,9 +18,7 @@ class Quote(Base):
 
 		self._path = API_PATH['quotes']
 		self._payload = {'symbols': self._symbol_load}
-		self._data = self._api_response(endpoint=self._endpoint,
-		                                path=self._path,
-		                                payload=self._payload)
+		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 
 	def _parse_response(self, attribute, **config):
 		# returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
@@ -42,8 +40,7 @@ class Quote(Base):
 		else:
 
 			for quote in self._data['quotes']['quote']:
-				# more than one symbol supplied, loop through each one
-
+				# if more than one symbol supplied, loop through each one
 				response_load[quote['symbol']] = quote[attribute]
 
 		return response_load
@@ -58,10 +55,10 @@ class Quote(Base):
 		.. code-block:: python
 
 			stocks = tradier.Stock('AAPL', 'MSFT')  # create instance of the Stock class
-			print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT}
+			print(stocks.symbol())  # output: {AAPL: AAPL, MSFT: MSFT}
 
 			stocks.add_symbols('GOOG', 'TSLA')
-			print stocks.symbol()  # output: {AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, TSLA: TSLA}
+			print(stocks.symbol())  # output: {AAPL: AAPL, MSFT: MSFT, GOOG: GOOG, TSLA: TSLA}
 
 		"""
 		# adds a given symbol to the array of tracked symbols. the `update` parameter chooses whether or not to

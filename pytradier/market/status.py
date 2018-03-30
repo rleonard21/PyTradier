@@ -11,9 +11,7 @@ class Status(Base):
 
         self._path = API_PATH['clock']
         self._payload = ''
-        self._data = self._api_response(endpoint=self._endpoint,
-                                        path=self._path,
-                                        payload=self._payload)
+        self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 
     def _parse_response(self, attribute, **config):
         # returns the data from the API response in a dictionary for, {symbol0: data0, symbol1: data1, symbol2: data2}
@@ -27,7 +25,6 @@ class Status(Base):
             self.update_data()  # updates by default, user must specify to not update from the API
 
         return self._data['clock'][attribute]
-
 
     def date(self, **config):
         """ An ISO representation of the date in YYYY-MM-DD. """
@@ -52,7 +49,8 @@ class Status(Base):
     def timestamp(self, **config):  # returns the timestamp of the last check
         """ Returns the timestamp of the status update. 
             
-            The default style is Unix Epoch time, though using ``style='pretty'`` returns the time in ``YYYY-MM-DD H:M:S``
+            The default style is Unix Epoch time, though using ``style='pretty'`` returns the time in
+            ``YYYY-MM-DD H:M:S``
         """
         response = self._parse_response('timestamp', **config)
 
@@ -67,7 +65,3 @@ class Status(Base):
 
         else:
             return response
-
-        
-"""  """        
-

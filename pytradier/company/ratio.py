@@ -3,10 +3,6 @@ class Ratio:
         self.__symbol = symbol
         self.__period = period
 
-
-
-
-
     def company_id(self):
         pass
 
@@ -25,7 +21,7 @@ class Ratio:
     def assets_turnover(self):
         pass
 
-    def avg_roi_5(self):  # a_v_g5_yrs_r_o_i_c
+    def avg_roi_5(self):
         pass
 
     # TODO: Theres still more...
