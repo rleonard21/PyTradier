@@ -1,7 +1,6 @@
 from ..base import Base
 from ..const import API_PATH
 
-
 class Lookup(Base):
     """ A class for looking up symbols or partial symbols. The results are listed by highest volume. 
     The results are a dictionary with the symbol as the key and the information from each method as the value. 
@@ -14,11 +13,11 @@ class Lookup(Base):
         :param exchange: The exchange of the symbol. As of current, only Tradier exchange symbols are accepted. 
         
         Any combination of these three parameters can be used to create a search. The results of the search are
-        stored in the instance of the class, which enables the local storage of results rather than having to
-        call to the API for each piece of information.
+        stored in the instance of the class, which allows for the local storage of results rather than having to call to the API
+        for each piece of information. 
         
-        This gives you a wide range of abilities. For example, to retrieve `every` stock on the NYSE, use the argument
-        ``exchange='A'`` ('A' is the Tradier exchange code for NYSE), and ignore the other parameters:
+        This gives you a wide range of abilities. For example, to retrieve `every` stock on the NYSE, use the argument ``exchange='A'``
+        ('A' is the Tradier exchange code for NYSE), and ignore the other parameters:
         
         .. code-block:: python
         
@@ -30,9 +29,10 @@ class Lookup(Base):
         .. code-block:: python
         
             {BAC: BAC, TWTR: TWTR, RAD: RAD, ... }
-
+        
+        
+        
         """
-
         Base.__init__(self)
 
         self._payload = {}
@@ -53,6 +53,7 @@ class Lookup(Base):
 
         self._key = self._data['securities']['security']
         self._inner_key = 'symbol'
+
 
     def symbol(self, **config):
         """ Return the symbol from the search. 
@@ -98,3 +99,4 @@ class Lookup(Base):
             tradier.market.lookup(symbol='AAPL').desc()
         """
         return self._parse_response(attribute='description', **config)
+  

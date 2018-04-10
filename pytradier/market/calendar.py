@@ -1,12 +1,11 @@
 from ..const import API_PATH
-from ..base import Base
 
+from ..base import Base
 
 class Calendar(Base):
     """A class for obtaining dates and times for the market, handling both past and future dates.   
         
     .. note::
-
         The output of each method is a dictionary with a date as the key and the particular 
         value of the method as the value.
         
@@ -30,7 +29,6 @@ class Calendar(Base):
         return a calendar for all of 2017. Future dates are also accepted.
         
         """
-
         Base.__init__(self)
 
         self._payload = {}
@@ -42,16 +40,18 @@ class Calendar(Base):
             self._payload['year'] = year
 
         self._path = API_PATH['calendar']
-        self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
+        self._data = self._api_response(endpoint=self._endpoint,
+                                        path=self._path,
+                                        payload=self._payload)
 
         self._key = self._data['calendar']['days']['day']
         self._inner_key = 'date'
 
-    def month(self):
+    def month(self, **config):
         """ Retrieve the month of the calendar. """
         return self._data['calendar']['month']
 
-    def year(self):
+    def year(self, **config):
         """ Retrieve the year of the calendar. """
         return self._data['calendar']['year']
 
@@ -68,8 +68,7 @@ class Calendar(Base):
         return self._parse_response(attribute='description', **config)
 
     def open(self, **config):
-        """ Returns a dictionary of the interval the market is open. Returns ``NoneType`` if the market is closed
-        (i.e. Sunday, etc.). """
+        """ Returns a dictionary of the interval the market is open. Returns ``NoneType`` if the market is closed (i.e. Sunday, etc.). """
         return self._parse_response(attribute='open', **config)
 
     def premarket(self, **config):

@@ -3,7 +3,6 @@ from .lookup import Lookup
 from .search import Search
 from .status import Status
 
-
 class Market:
 
     def __init__(self):

@@ -22,6 +22,7 @@ class Option(Quote):
         
             {TSLA: TSLA, F:F}
         
+        
         """
         Quote.__init__(self, *symbols)  # init the Quote and Base classes as supers
 
@@ -52,3 +53,5 @@ class Option(Quote):
     def open_interest(self, **config):
         """ Return the open interest for the contract. """
         return self._parse_response(attribute='open_interest', **config)
+
+

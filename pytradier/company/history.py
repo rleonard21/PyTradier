@@ -6,14 +6,11 @@ import time
 class History(Base):
 	""" A class for handling historical pricing of companies. """
 	def __init__(self, symbol, interval=None, start=None, end=None):
-		
 		""" Create an instance of the History class.
 
-		:param symbol: The requested company symbol. By default, the parent ``Company`` class symbol is passed to
-		this method.
-		:param interval: Interval of time for the requested data set. Defaults to ``'daily'``, but can also take
-		``weekly`` and ``monthly``. For example, if the interval is set to ``'monthly'``, then each piece of data
-		represents one month. A smaller interval has more data. `Optional.`
+		:param symbol: The requested company symbol. By default, the parent ``Company`` class symbol is passed to this method.
+		:param interval: Interval of time for the requested data set. Defaults to ``'daily'``, but can also take ``weekly`` and ``monthly``.
+			For example, if the interval is set to ``'monthly'``, then each piece of data represents one month. A smaller interval has more data. `Optional.`
 		:param start: The start date of the data set in the format ``YYYY-MM-DD``. `Optional.`
 		:param end: The end date of the data set in the format ``YYYY-MM-DD``. `Optional.`
 
@@ -23,8 +20,6 @@ class History(Base):
 			value. Dictionaries are `unordered`.
 
 		"""
-		
-		
 		Base.__init__(self)
 
 		self._symbol = symbol
@@ -44,7 +39,9 @@ class History(Base):
 			self._payload['end'] = self._end
 
 		self._path = API_PATH['history']
-		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
+		self._data = self._api_response(endpoint=self._endpoint,
+		                                path=self._path,
+		                                payload=self._payload)
 
 		self._key = self._data['history']['day']
 		self._inner_key = 'date'

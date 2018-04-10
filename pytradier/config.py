@@ -1,7 +1,6 @@
 import configparser
 from .exceptions import ClientException
 
-
 def get_auth(location):
 	config = configparser.ConfigParser()
 	config.read(location)

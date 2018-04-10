@@ -1,7 +1,6 @@
 from ..base import Base
 from ..const import API_PATH
 
-
 class Search(Base):
     """ A class for searching for a company. """
     def __init__(self, **query):
@@ -44,3 +43,6 @@ class Search(Base):
     def desc(self, **config):
         """ Return a short description of the company. """
         return self._parse_response(attribute='description', **config)
+
+
+
