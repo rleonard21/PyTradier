@@ -1,108 +1,89 @@
-import os
 
-from . import account
-from . import company
-from . import market
-from . import order
-from .config import get_auth
 from .const import API_ENDPOINT
-from .exceptions import ClientException
+
+from . import company
+from . import account
+from . import order
+from . import market
+
 from .securities import stock, option
+
+from .exceptions import ClientException
+
+import os
+# from . import user
+
 
 
 class Tradier:
 
-	def __init__(self, **config):
-		""" Create an instance of the ``Tradier`` class.
-		There are two methods for authenticating with the Tradier API. The first method is to use a ``pytradier.ini``
-		file with the correct credentials. The second way enables the user to authenticate directly in the script
-		without the use of an external file.
+    def __init__(self, token, account_id=None, endpoint=None):
+        """ Create an instance of the ``Tradier`` class. 
+        
+        :param token: The API access token provided by Tradier. `Required.`
+        :param account_id: The ID associated with your Tradier brokerage account. If not provided, you will only
+        be able to access market data. 
+        :param endpoint: The chosen endpoint. If not provided, it defaults to using the full API. For developer only
+        accounts, you must specify ``endpoint='sandbox'``.
+        
+        An instance of the ``Tradier`` class must be created in order to access any part of the Tradier API,
+        since the API is protected and the ``Tradier`` class contains your access token, account ID, and endpoint. 
+        
+        .. code-block:: python
+        
+            tradier = Tradier(token='a1b2c3d4e5', account_id='0123456789', endpoint=None)
+        
+        From here, all parts of the PyTradier library can be access through your instance of the ``Tradier`` class. 
+        For example, to retrieve the current market status:
+        
+        .. code-block:: python
+        
+            print tradier.market.status()  # output: open
+        
+        
+        
+        
+        
+        """
 
-		If the developer decides to use an external file to store credentials, the ``pytradier.ini`` file should be
-		structured like this:
+        os.environ["API_TOKEN"] = token  # create environment variable for all files to use
 
-		.. code-block:: bash
+        if account_id is None:  # environment variables must me type str
+            os.environ['API_ACCOUNT_ID'] = "None"
 
-			[AUTH]
-			Token =
-			AccountID =
-			Endpoint =
+        else:
+            os.environ["API_ACCOUNT_ID"] = account_id
 
-		:param Token: The API access token provided by Tradier.
-		:param AccountID: The ID associated with the Tradier brokerage account. If the developer does not have a
-		brokerage account, this value should be set to ``None``.
-		:param Endpoint: The chosen endpoint of the API. Use ``brokerage`` if the developer has a brokerage account and
-		use ``sandbox`` if not.
 
-		If the developer decides to leave credentials in the script, this method can be done using the following
-		parameters:
+        if endpoint is None:  # user did not specify an endpoint
+            os.environ['API_ENDPOINT'] = API_ENDPOINT['sandbox']  # default endpoint is the sandbox
 
-		:param token: The API access token provided by Tradier.
-		:param account_id: The ID associated with the Tradier brokerage account. If the developer does not have a
-		brokerage account, this value should be set to ``None``.
-		:param endpoint: The chosen endpoint of the API. Use ``brokerage`` if the developer has a brokerage account and
-		use ``sandbox`` if not.
+        else:
+            try:
+                os.environ['API_ENDPOINT'] = API_ENDPOINT[endpoint]
 
-		In either case, an instance of the ``Tradier`` class must be created in order to access any part of the Tradier
-		API, since the API is protected and the ``Tradier`` class contains your access token, account ID, and endpoint.
+            except KeyError:
+                raise ClientException('Given endpoint not supported.')
 
-		.. code-block:: python
+        self.market = market.Market()
 
-			tradier = Tradier(token='a1b2c3d4e5', account_id='0123456789', endpoint=None)
+    def account(self):
+        """ Provide an instance of ``account``. """
+        return account.Account()
 
-		From here, all parts of the PyTradier library can be access through your instance of the ``Tradier`` class.
-		For example, to retrieve the current market status:
+    def company(self, symbol):
+        """ Provide an instance of ``company``. This is for accessing information about a company, including historical pricing
+        for their stock. """
+        return company.Company(symbol=symbol)
 
-		.. code-block:: python
+    def order(self):
+        """ Provide an instance of ``order``. This is the class in which trading takes place. """
+        return order.Order()
 
-			print tradier.market.status()
+    def stock(self, *symbols):
+        """ Provide an instance of ``stock``. This is the gateway to market data for stocks. """
+        return stock.Stock(*symbols)
 
-		"""
-
-		if 'auth' in config.keys():
-			auth = get_auth(config['auth'])
-			os.environ['API_TOKEN'] = auth[0]
-			os.environ['API_ACCOUNT_ID'] = auth[1]
-
-			try:
-				os.environ['API_ENDPOINT'] = API_ENDPOINT[auth[2]]
-
-			except KeyError:
-				raise ClientException('Given endpoint not supported.')
-
-		if 'token' in config.keys():
-			os.environ['API_TOKEN'] = config['token']  # create environment variable for all files to use
-
-		if 'account_id' in config.keys():  # environment variables must me type str
-			os.environ['API_ACCOUNT_ID'] = config['account_id']
-
-		if 'endpoint' in config.keys():  # user did not specify an endpoint
-
-			try:
-				os.environ['API_ENDPOINT'] = API_ENDPOINT[config['endpoint']]
-
-			except KeyError:
-				raise ClientException('Given endpoint not supported.')
-
-		self.market = market.Market()
-
-	def account(self):
-		""" Provide an instance of ``account``. """
-		return account.Account()
-
-	def company(self, symbol):
-		""" Provide an instance of ``company``. This is for accessing information about a company, including historical pricing
-		for their stock. """
-		return company.Company(symbol=symbol)
-
-	def order(self):
-		""" Provide an instance of ``order``. This is the class in which trading takes place. """
-		return order.Order()
-
-	def stock(self, *symbols):
-		""" Provide an instance of ``stock``. This is the gateway to market data for stocks. """
-		return stock.Stock(*symbols)
-
-	def option(self, *symbols):
-		""" Provide an instance of ``option``. This is the gateway to market data for options. """
-		return option.Option(*symbols)
+    def option(self, *symbols):
+        """ Provide an instance of ``option``. This is the gateway to market data for options. """
+        return option.Option(*symbols)
