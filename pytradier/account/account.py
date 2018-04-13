@@ -4,11 +4,16 @@ from .history import History
 from .orders import Orders
 from .orderstatus import OrderStatus
 from .positions import Positions
+from ..const import API_ENDPOINT
+from ..exceptions import ClientException
+import os
+
 
 class Account:
     def __init__(self):
-        pass
-
+        if os.environ['API_ENDPOINT'] != API_ENDPOINT['brokerage']:
+            # This part of the API only works with the full brokerage API, so require the 'brokerage' API endpoint.
+            raise ClientException('Bad Endpoint: account paths require the full API (no sandbox!)')
 
     def balance(self):
         return Balance()
