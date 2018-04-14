@@ -1,10 +1,9 @@
 from ..base import Base
 from ..const import API_PATH
-from .account_helper import AccountHelper
 import os
 
 
-class Balance(Base, AccountHelper):
+class Balance(Base):
 	def __init__(self):
 		Base.__init__(self)
 
