@@ -1,9 +1,7 @@
 from .balance import Balance
-from .costbasis import CostBasis
-from .history import History
+from .costbasis import ClosedPosition
+from .events import Event
 from .orderstatus import OrderStatus
-from .orders import Orders
-from .positions import Positions
-
+from .order import Order
 
 from .account import Account
