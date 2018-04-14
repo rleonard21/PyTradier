@@ -8,6 +8,9 @@
 Welcome to PyTradier's documentation!
 =====================================
 
+Please see the examples for a quick start with this library: `Examples! 
+<https://github.com/rleonard21/PyTradier/tree/master/examples>`_.
+
 .. toctree::
    :maxdepth: 1
    :caption: Getting Started
