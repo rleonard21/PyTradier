@@ -71,10 +71,19 @@ class TimeSales(Base):
     def low(self, **config):
         """ Return the lowest price of the interval. """
         return self._parse_response(attribute='low', **config)
+    
+    def price(self, **config):
+        """ Return the last price of the interval. """
+        return self._parse_response(attribute='price', **config)
 
     def volume(self, **config):
         """ Return the total volume of the interval. """
         return self._parse_response(attribute='volume', **config)
+    
+    def vwap(self, **config):
+        """ Return the volume weighted average price of the interval. """
+        return self._parse_response(attribute='vwap', **config)
+    
 
 
 
