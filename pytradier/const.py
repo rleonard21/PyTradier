@@ -74,6 +74,7 @@ EXCHANGE_CODES = {
 	'I': 'International Securities Exchange',
 	'J': 'Direct Edge A',
 	'K': 'Direct Edge X',
+	'L': 'Long Term Stock Exchange',
 	'M': 'Chicago Stock Exchange',
 	'N': 'NYSE',
 	'P': 'NYSE Arca',
