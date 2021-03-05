@@ -51,7 +51,10 @@ class Lookup(Base):
                                         path=self._path,
                                         payload=self._payload)
 
-        self._key = self._data['securities']['security']
+        if self._data['securities'] is not None:
+            self._key = self._data['securities']['security']
+        else:
+            self._key = []
         self._inner_key = 'symbol'
 
 
