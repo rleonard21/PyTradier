@@ -75,6 +75,8 @@ class Base(object):
 
         response_load = {}
 
+        if type(self._key) is not list:
+            self._key = [self._key]
         for response in self._key:
             # more than one symbol supplied, loop through each one
             if attribute in list(response.keys()):
