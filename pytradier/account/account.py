@@ -17,9 +17,9 @@ class Account(Base):
 	def __init__(self):
 		Base.__init__(self)
 
-		if os.environ['API_ENDPOINT'] != API_ENDPOINT['brokerage']:
-			# This part of the API only works with the full brokerage API, so require the 'brokerage' API endpoint.
-			raise ClientException('Bad Endpoint: account paths require the full API (no sandbox!)')
+		if os.environ['API_ENDPOINT'] not in [API_ENDPOINT['brokerage'], API_ENDPOINT['brokerage_sandbox']]:
+			# This part of the API only works with the full brokerage API, so require a 'brokerage' API endpoint.
+			raise ClientException('Bad Endpoint: account paths require the full API or brokerage sandbox (no developer sandbox!)')
 
 	def balance(self):
 		return Balance()

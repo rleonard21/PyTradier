@@ -14,7 +14,7 @@ The initialization for ``Tradier`` takes three parameters:
 
 * ``token`` Your API access token provided by Tradier. *Required.*
 * ``account_id`` The ID number associated with your Tradier Brokerage account. You will only have this if you have opened a Brokerage account with Tradier. *Optional.*
-* ``sandbox`` Determines whether the sandbox or full API endpoint will be used. Sandbox has limited access, but it completely free. The full API requires a Brokerage account. *Optional.*
+* ``endpoint`` Determines whether the developer sandbox, brokerage sandbox, or full API endpoint will be used. Developer sandbox has limited access, but is completely free. The full API requires a Brokerage account. Brokerage accounts also come with a sandbox account for paper trading and has the capabilites of the full API. *Optional.*
 
 Once the ``Tradier`` class has been initialized, all submodules can be called like this:
 

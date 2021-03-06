@@ -24,7 +24,7 @@ class Tradier:
         :param account_id: The ID associated with your Tradier brokerage account. If not provided, you will only
         be able to access market data. 
         :param endpoint: The chosen endpoint. If not provided, it defaults to using the full API. For developer only
-        accounts, you must specify ``endpoint='sandbox'``.
+        accounts, you must specify ``endpoint='developer_sandbox'``.
         
         An instance of the ``Tradier`` class must be created in order to access any part of the Tradier API,
         since the API is protected and the ``Tradier`` class contains your access token, account ID, and endpoint. 
@@ -56,7 +56,7 @@ class Tradier:
 
 
         if endpoint is None:  # user did not specify an endpoint
-            os.environ['API_ENDPOINT'] = API_ENDPOINT['sandbox']  # default endpoint is the sandbox
+            os.environ['API_ENDPOINT'] = API_ENDPOINT['developer_sandbox']  # default endpoint is the developer_sandbox
 
         else:
             try:
