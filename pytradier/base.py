@@ -24,7 +24,7 @@ class Base(object):
         """ Retrieve the requested data from Tradier. This is the main function called by other classes to retrieve information.
         
         :param endpoint: The desired endpoint. By default, this is passed in from the intialization of the ``Tradier`` class.
-            Accepts ``'sandbox'`` or ``'api'``.
+            Accepts ``'developer_sandbox'``, ``'brokerage_sandbox'``, or ``'brokerage'``.
         :param path: The API path to information. By default, this is passed in from the inheriting class's endpoint. Endpoints
             are in the form ``/v1/markets/quotes``.
         :param payload: A dictionary of the information required to send to Tradier for API calls. For example, the Market Data endpoint

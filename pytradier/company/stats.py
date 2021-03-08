@@ -1,5 +1,5 @@
-from pytradier import base
-from pytradier.const import API_ENDPOINT, API_PATH
+from .. import base
+from ..const import API_ENDPOINT, API_PATH
 
 class Stats:
 
