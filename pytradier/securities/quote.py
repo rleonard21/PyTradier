@@ -35,7 +35,7 @@ class Quote(Base):
 
 		response_load = {}
 
-		if len(self._symbols) is 1:
+		if len(self._symbols) == 1:
 			# if there is only one symbol supplied, add it to the dictionary
 			response_load[self._data['quotes']['quote']['symbol']] = self._data['quotes']['quote'][attribute]
 
