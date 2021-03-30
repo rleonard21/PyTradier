@@ -59,10 +59,10 @@ class Status(Base):
         if 'style' in list(config.keys()):
             # user has specified style of time response
 
-            if config['style'] is 'epoch':
+            if config['style'] == 'epoch':
                 return response  # API returns Unix epoch by default, so return raw response time value
 
-            if config['style'] is 'pretty':  # useful for displaying the timestamp
+            if config['style'] == 'pretty':  # useful for displaying the timestamp
                 return time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(response))
 
         else:
