@@ -30,7 +30,10 @@ class Chain(Base):
                                         path=self._path,
                                         payload=self._payload)
 
-        self._key = self._data['options']['option']
+        if self._data['options'] is not None:
+            self._key = self._data['options']['option']
+        else:
+            self._key = []
         self._inner_key = 'symbol'
 
 
