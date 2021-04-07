@@ -29,8 +29,9 @@ class Expirations(Base):
         else:
             # update the data if the `update` parameter is true
             self.update_data()  # updates by default, user must specify to not update from the API
-
-        return self._data['expirations']['date']
+        if self._data['expirations'] is not None:
+            return self._data['expirations']['date']
+        return []
 
     def date(self, **config):
         """ Return the list of expirations dates for the symbol. """
