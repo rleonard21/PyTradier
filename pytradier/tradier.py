@@ -48,7 +48,7 @@ class Tradier:
 
         os.environ["API_TOKEN"] = token  # create environment variable for all files to use
 
-        if account_id is None:  # environment variables must me type str
+        if account_id is None:  # environment variables must be type str
             os.environ['API_ACCOUNT_ID'] = "None"
 
         else:
