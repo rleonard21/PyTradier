@@ -8,8 +8,8 @@ class Chain(Base):
 
         :param symbol: The symbol for the options chain. By default, this is passed from the parent ``Company`` class.
         :param expiration: The desired expiration for the options in the format ``YYY-MM-DD``. `Required.`
-        :param greeks: Bool API responce will include a dictionary object containing the greeks for each contract.  
-        
+        :param greeks:  API responce will include a dictionary object containing the greeks for each contract. "Bool"  
+
             greeks.delta 	    Delta
             greeks.gamma 	    Gamma
             greeks.theta 	    Theta
