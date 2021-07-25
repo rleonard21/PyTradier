@@ -25,7 +25,7 @@ class Order(Base):
 
     def submit_order(self,
                      order_class: str,
-                     symbol: str,
+                     symbol: Union[str, list],
                      side: Union[str, list],
                      qty: Union[int, list],
                      order_type: Union[str, list]=None,
