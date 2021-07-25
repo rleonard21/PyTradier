@@ -23,7 +23,7 @@ class Order(Base):
     class OrderError(Exception):
         pass
 
-    def submit_order(self,
+    def submit_order(self, *, 
                      order_class: str,
                      symbol: Union[str, list],
                      side: Union[str, list],
@@ -86,7 +86,7 @@ class Order(Base):
         self.validate_order(**all_args)
         return self._submit_order(**all_args)
 
-    def request(self, kind, endpoint, params) -> dict:
+    def request(self, kind, endpoint, params, **kwargs) -> dict:
         """ Convenience function for sending order-specific
             requests to account endpoints.
         """
@@ -94,7 +94,7 @@ class Order(Base):
                    "Authorization": "Bearer " + self.__token}
 
         response = requests.request(kind, endpoint, headers=headers,
-                                    params=params)
+                                    params=params, **kwargs)
         response.raise_for_status()
         return response.json()
 
@@ -104,22 +104,55 @@ class Order(Base):
             should not be called directly. Use ``submit_order`` instead.
         """
 
-        params = {"class": order_class,
-                  "side": side,
-                  "quantity": qty,
-                  "type": order_type,
-                  "duration": time_in_force,
-                  "price": limit_price,
-                  "stop": stop_price,
+
+        if isinstance(symbol, str):
+            option = Order.is_occ(symbol) if not option else option
+            _symbol = symbol
+        else:
+            option = Order.is_occ(symbol[0]) if not option else option
+            _symbol = symbol[0]
+
+        params = {"class" : order_class,
+                  "duration" : time_in_force,
                   "tag": tag}
 
-        if option:
-            params['option_symbol'] = symbol
-            params['symbol'] = symbol[:re.search('\d').start()]
-        else:
-            params['symbol'] = symbol
+        if order_class in ['option', 'equity']:
+            params.update({"side": side,
+                           "quantity": qty,
+                           "type": order_type,
+                           "price": limit_price,
+                           "stop": stop_price})
 
-        return self.request('post', self.accounts_ep, params)['order']
+            if option:
+                params['option_symbol'] = symbol
+                params['symbol'] = symbol[:re.search(r'\d', symbol).start()]
+            else:
+                params['symbol'] = symbol
+
+            r = self.request('post', self.accounts_ep, params)
+
+        elif order_class in ['multileg', 'combo', 'oto', 'oco', 'otoco']:
+            if option:
+                params['symbol'] = symbol[0][:re.search(r'\d', symbol[0]).start()]
+                
+            if isinstance(order_type, str):
+                params['type'] = order_type
+                
+            for ii in range(len(symbol)):
+                if option:
+                    params[f'option_symbol[{ii}]'] = symbol[ii]
+                else:
+                    params[f'symbol[{ii}]'] = symbol[ii]
+
+                if not isinstance(order_type, str):
+                    params[f'type[{ii}]'] = order_type[ii]
+                    
+                params[f'quantity[{ii}]'] = qty[ii]
+                params[f'side[{ii}]'] = side[ii]
+
+            r = self.request('post', self.accounts_ep, {}, data=params)
+                
+        return r['order']
 
     def validate_order(self, *, order_class, symbol, side, qty, order_type,
                        time_in_force, limit_price, stop_price, tag,
@@ -129,7 +162,10 @@ class Order(Base):
             performing set and value tests
         """
 
-        option = Order.is_occ(symbol) if not option else option
+        if isinstance(symbol, str):
+            option = Order.is_occ(symbol) if not option else option
+        else:
+            option = Order.is_occ(symbol[0]) if not option else option
 
         equity_classes = ['equity', 'oto', 'oco', 'otoco']
         option_classes = ['option', 'multileg', 'combo', 'oto', 'oco', 'otoco']
