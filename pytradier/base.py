@@ -6,11 +6,11 @@ from .exceptions import APIException
 
 class Base(object):
 
-    def __init__(self):
+    def __init__(self, token, id, endpoint):
         """ Create an instance of the Base class. """
-        self.__token = os.environ['API_TOKEN']
-        self.__id = os.environ['API_ACCOUNT_ID']
-        self._endpoint = os.environ['API_ENDPOINT']
+        self._token = token
+        self._id = id
+        self._endpoint = endpoint
 
         self._path = ''
         self._key = {}
@@ -18,7 +18,7 @@ class Base(object):
         self._payload = ''
         self._data = {}
 
-        self.__last_updated = time.time()
+        self._last_updated = time.time()
 
     def _api_response(self, endpoint, path, payload):
         """ Retrieve the requested data from Tradier. This is the main function called by other classes to retrieve information.
@@ -36,7 +36,7 @@ class Base(object):
         """
         
         headers = {"Accept": "application/json",
-                   "Authorization": "Bearer " + self.__token}
+                   "Authorization": "Bearer " + self._token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
         # print r.url

@@ -4,7 +4,7 @@ from .quote import Quote
 class Option(Quote):
     """ A class for fetching and storing market data for options. """
     
-    def __init__(self, *symbols):
+    def __init__(self, base, *symbols):
         """ Create an instance of the Option class. 
         
         :param symbols: The symbol(s) of the options contract(s) to track. 
@@ -24,7 +24,7 @@ class Option(Quote):
         
         
         """
-        Quote.__init__(self, *symbols)  # init the Quote and Base classes as supers
+        self.__dict__.update(base.__dict__)
 
     def strike(self, **config):
         """ Return the strike price of the option. """

@@ -5,7 +5,7 @@ import time
 
 class History(Base):
 	""" A class for handling historical pricing of companies. """
-	def __init__(self, symbol, interval=None, start=None, end=None):
+	def __init__(self, base, symbol, interval=None, start=None, end=None):
 		""" Create an instance of the History class.
 
 		:param symbol: The requested company symbol. By default, the parent ``Company`` class symbol is passed to this method.
@@ -20,7 +20,7 @@ class History(Base):
 			value. Dictionaries are `unordered`.
 
 		"""
-		Base.__init__(self)
+		self.__dict__.update(base.__dict__)
 
 		self._symbol = symbol
 		self._interval = interval

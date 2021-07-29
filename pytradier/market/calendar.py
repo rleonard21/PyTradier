@@ -11,7 +11,7 @@ class Calendar(Base):
         
     """
 
-    def __init__(self, month=None, year=None):
+    def __init__(self, base, month=None, year=None):
         """Create an instance of the Calendar class.
         
         :param month: Month of the calendar requested.
@@ -29,7 +29,7 @@ class Calendar(Base):
         return a calendar for all of 2017. Future dates are also accepted.
         
         """
-        Base.__init__(self)
+        self.__dict__.update(base.__dict__)
 
         self._payload = {}
 

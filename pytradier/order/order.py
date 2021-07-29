@@ -7,17 +7,15 @@ import requests
 import traceback
 
 from typing import Union
-from ..base import Base
 from ..const import API_PATH
 
 
-class Order(Base):
-    def __init__(self):
-        self.__token = os.environ['API_TOKEN']
-        self.__id = os.environ['API_ACCOUNT_ID']
-        self._endpoint = os.environ['API_ENDPOINT']
+class Order:
+    def __init__(self, base):
+        self.__dict__.update(base.__dict__)
+        
         self.accounts_ep = self._endpoint+API_PATH['account_orders'].format(
-            account_id=self.__id)
+            account_id=self._id)
         self.orders_ep = self.accounts_ep+"/{order_id}"
 
     class OrderError(Exception):
@@ -91,7 +89,7 @@ class Order(Base):
             requests to account endpoints.
         """
         headers = {"Accept": "application/json",
-                   "Authorization": "Bearer " + self.__token}
+                   "Authorization": "Bearer " + self._token}
 
         response = requests.request(kind, endpoint, headers=headers,
                                     params=params, **kwargs)

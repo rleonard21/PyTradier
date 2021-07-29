@@ -4,11 +4,11 @@ import os
 
 
 class Balance(Base):
-	def __init__(self):
-		Base.__init__(self)
+	def __init__(self, base):
+		self.__dict__.update(base.__dict__)
 
 		# replace the {account_id} in '/v1/account/{account_id}/' with the account id
-		self._path = API_PATH['account_balances'].replace('{account_id}', os.environ['API_ACCOUNT_ID'])
+		self._path = API_PATH['account_balances'].replace('{account_id}', self._id)
 
 		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 

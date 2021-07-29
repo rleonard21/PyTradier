@@ -12,20 +12,23 @@ from .expirations import Expirations
 
 
 class Company:
-    def __init__(self, symbol):
+    def __init__(self, base, symbol):
+        self.base = base
         self._symbol = symbol
+        
+        self.Expirations = Expirations(self.base, self._symbol)
 
     def chain(self, expiration, greeks=bool):
-        return Chain(self._symbol, expiration, greeks)
+        return Chain(self.base, self._symbol, expiration, greeks)
 
     def expirations(self):
-        return Expirations(self._symbol)
+        return self.Expirations
 
     def history(self, interval=None, start=None, end=None):
-        return History(self._symbol, interval, start, end)
+        return History(self.base, self._symbol, interval, start, end)
 
     def timesales(self, interval=None, start=None, end=None, sfilter=None):
-        return TimeSales(self._symbol, interval, start, end, sfilter)
+        return TimeSales(self.base, self._symbol, interval, start, end, sfilter)
 
     # Tradier has not yet implemented the following functions
     # into their API:

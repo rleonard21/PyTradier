@@ -6,8 +6,8 @@ import time
 
 class Status(Base):
     """ A class for the current market status. """
-    def __init__(self):
-        Base.__init__(self)
+    def __init__(self, base):
+        self.__dict__.update(base.__dict__)
 
         self._path = API_PATH['clock']
         self._payload = ''

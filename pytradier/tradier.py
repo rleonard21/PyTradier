@@ -1,6 +1,7 @@
 
 from .const import API_ENDPOINT
 
+from .base import Base
 from . import company
 from . import account
 from . import order
@@ -46,44 +47,29 @@ class Tradier:
         
         """
 
-        os.environ["API_TOKEN"] = token  # create environment variable for all files to use
-
-        if account_id is None:  # environment variables must be type str
-            os.environ['API_ACCOUNT_ID'] = "None"
-
-        else:
-            os.environ["API_ACCOUNT_ID"] = account_id
-
-
-        if endpoint is None:  # user did not specify an endpoint
-            os.environ['API_ENDPOINT'] = API_ENDPOINT['developer_sandbox']  # default endpoint is the developer_sandbox
-
-        else:
-            try:
-                os.environ['API_ENDPOINT'] = API_ENDPOINT[endpoint]
-
-            except KeyError:
-                raise ClientException('Given endpoint not supported.')
-
-        self.market = market.Market()
+        endpoint = API_ENDPOINT[endpoint] if endpoint is not None else API_ENDPOINT['developer_sandbox']
+        self.__base = Base(token, account_id, endpoint)
+        self.market = market.Market(self.__base)
+        self.Account = account.Account(self.__base)
+        self.Order = order.Order(self.__base)
 
     def account(self):
         """ Provide an instance of ``account``. """
-        return account.Account()
+        return self.Account
 
     def company(self, symbol):
         """ Provide an instance of ``company``. This is for accessing information about a company, including historical pricing
         for their stock. """
-        return company.Company(symbol=symbol)
+        return company.Company(self.__base, symbol=symbol)
 
     def order(self):
         """ Provide an instance of ``order``. This is the class in which trading takes place. """
-        return order.Order()
+        return self.Order
 
     def stock(self, *symbols):
         """ Provide an instance of ``stock``. This is the gateway to market data for stocks. """
-        return stock.Stock(*symbols)
+        return stock.Stock(self.__base, *symbols)
 
     def option(self, *symbols):
         """ Provide an instance of ``option``. This is the gateway to market data for options. """
-        return option.Option(*symbols)
+        return option.Option(self.__base, *symbols)
