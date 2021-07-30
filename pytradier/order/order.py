@@ -149,6 +149,9 @@ class Order:
                 params[f'side[{ii}]'] = side[ii]
 
             r = self.request('post', self.accounts_ep, {}, data=params)
+
+            if __debug__:
+                print(r)
                 
         return r['order']
 
