@@ -152,6 +152,9 @@ class Order:
 
             if __debug__:
                 print(r)
+
+            if not 'order' in r.keys():
+                raise Exception("Order not placed")
                 
         return r['order']
 
