@@ -276,6 +276,13 @@ class Order:
         """
         return self.request('delete', self.orders_ep.format(order_id=id), {})
 
+    def get_order(self, id):
+        """ Retrieve an existing order by ``id``
+        :param id: The ID of the order to retrieve.
+        """
+        return self.request('get', self.orders_ep.format(order_id=id),
+                            {'includeTags': 'true'})['order']
+
     def get_orders(self):
         return self.request('get', self.accounts_ep,
                             {'includeTags': 'true'})['orders']
