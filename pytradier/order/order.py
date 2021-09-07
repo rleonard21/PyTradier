@@ -148,6 +148,9 @@ class Order:
                 params[f'quantity[{ii}]'] = qty[ii]
                 params[f'side[{ii}]'] = side[ii]
 
+            if limit_price is not None and order_class == 'multileg':
+                params['price'] = limit_price
+
             r = self.request('post', self.accounts_ep, {}, data=params)
 
             if __debug__:
