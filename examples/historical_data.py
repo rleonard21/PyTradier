@@ -7,7 +7,7 @@ tradier = Tradier(token='YourToken', account_id='YourAccountID', endpoint='broke
 company = tradier.company(symbol='AAPL')
 
 # get the historical prices between 2011 and 2012
-history = company.history(interval='monthly', start='2011-1-1', end='2012-1-1')
+history = company.history(interval='monthly', start='2011-01-01', end='2012-01-01')
 
 # you can now use the history object to retrieve data associated with a specific date. each method returns a dictionary
 # with a date as the key and the data as the value. for example:
