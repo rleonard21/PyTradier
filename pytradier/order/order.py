@@ -91,8 +91,17 @@ class Order:
         headers = {"Accept": "application/json",
                    "Authorization": "Bearer " + self._token}
 
-        response = requests.request(kind, endpoint, headers=headers,
-                                    params=params, **kwargs)
+        try:
+            response = requests.request(kind, endpoint, headers=headers,
+                                        params=params, **kwargs)
+        except Exception:
+            print(f"Exception in Order.request to endpoint {endpoint}\n Headers:")
+            pprint(headers)
+            print(f"Params:")
+            pprint(params)
+            print("kwargs:")
+            pprint(kwargs)
+              
         response.raise_for_status()
         return response.json()
 

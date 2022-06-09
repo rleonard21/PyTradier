@@ -39,8 +39,6 @@ class Base(object):
                    "Authorization": "Bearer " + self._token}
 
         r = requests.request('GET', endpoint + path, headers=headers, params=payload)
-        # print r.url
-        # print r.headers
         # print 'remaining: ', r.headers['X-Ratelimit-Available']  # displays the remaining API calls for the interval
         # print r.content
 

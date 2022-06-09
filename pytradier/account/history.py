@@ -10,7 +10,7 @@ class History(Base):
         
         self._path = API_PATH['account_history'].replace('{account_id}', self._id)
         self._path += '?limit={}'.format(limit)
-        self._data = base._api_response(endpoint=self._endpoint, path=self._path, payload='{}')
+        self._data = base._api_response(endpoint=self._endpoint, path=self._path, payload={})
         self._key = self._data['history']['event']
         self._inner_key = 'type'
         
