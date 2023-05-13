@@ -15,7 +15,7 @@ class Company:
     def __init__(self, symbol):
         self._symbol = symbol
 
-    def chain(self, expiration, greeks=bool):
+    def chain(self, expiration, greeks=True):
         return Chain(self._symbol, expiration, greeks)
 
     def expirations(self):
