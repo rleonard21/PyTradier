@@ -138,6 +138,13 @@ class Order:
 
             r = self.request('post', self.accounts_ep, params)
 
+            if __debug__:
+                print(r)
+
+            if not 'order' in r.keys():
+                pprint(r)
+                raise Exception("Order not placed")
+
         elif order_class in ['multileg', 'combo', 'oto', 'oco', 'otoco']:
             if option:
                 params['symbol'] = symbol[0][:re.search(r'\d', symbol[0]).start()]
@@ -166,6 +173,7 @@ class Order:
                 print(r)
 
             if not 'order' in r.keys():
+                pprint(r)
                 raise Exception("Order not placed")
                 
         return r['order']
