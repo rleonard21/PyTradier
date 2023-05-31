@@ -18,8 +18,8 @@ class Company:
         
         self.Expirations = Expirations(self.base, self._symbol)
 
-    def chain(self, expiration, greeks=bool):
-        return Chain(self.base, self._symbol, expiration, greeks)
+    def chain(self, expiration, greeks=True):
+        return Chain(self._symbol, expiration, greeks)
 
     def expirations(self):
         return self.Expirations
