@@ -5,7 +5,7 @@ class Lookup(Base):
     """ A class for looking up symbols or partial symbols. The results are listed by highest volume. 
     The results are a dictionary with the symbol as the key and the information from each method as the value. 
     """
-    def __init__(self, **query):
+    def __init__(self, base, **query):
         """ Create an instance for the symbol lookup. 
         
         :param symbol: The requested search symbol. It can be a full or partial symbol. 
@@ -33,7 +33,7 @@ class Lookup(Base):
         
         
         """
-        Base.__init__(self)
+        self.__dict__.update(base.__dict__)
 
         self._payload = {}
 

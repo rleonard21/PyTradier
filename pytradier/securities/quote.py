@@ -6,8 +6,8 @@ from ..const import EXCHANGE_CODES
 class Quote(Base):
 	# Super class for quotes
 
-	def __init__(self, *symbols):
-		Base.__init__(self)
+	def __init__(self, base, *symbols):
+		self.__dict__.update(base.__dict__)
 
 		self._symbols = []
 

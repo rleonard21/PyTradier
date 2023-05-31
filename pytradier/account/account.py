@@ -12,20 +12,18 @@ from .history import History
 
 import os
 
-
 class Account(Base):
-	def __init__(self):
-		Base.__init__(self)
+	def __init__(self, base):
+		self.__dict__.update(base.__dict__)
+		self.base = base
 
-		if os.environ['API_ENDPOINT'] not in [API_ENDPOINT['brokerage'], API_ENDPOINT['brokerage_sandbox']]:
-			# This part of the API only works with the full brokerage API, so require a 'brokerage' API endpoint.
-			raise ClientException('Bad Endpoint: account paths require the full API or brokerage sandbox (no developer sandbox!)')
+		self.Balance = Balance(base)
 
 	def balance(self):
-		return Balance()
+		return self.Balance
 
 	def costbasis(self):
-		self._path = API_PATH['account_gainloss'].replace('{account_id}', os.environ['API_ACCOUNT_ID'])
+		self._path = API_PATH['account_gainloss'].replace('{account_id}', self._id)
 		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 		
 		try:
@@ -47,10 +45,10 @@ class Account(Base):
 		return closed_positions
 	
 	def history(self, limit=25):
-		return History(limit)
+		return History(self.base, limit)
 	
 	def orders(self):
-		self._path = API_PATH['account_orders'].replace('{account_id}', os.environ['API_ACCOUNT_ID'])
+		self._path = API_PATH['account_orders'].replace('{account_id}', self._id)
 		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 		
 		try:
@@ -78,7 +76,7 @@ class Account(Base):
 		:return: Returns a list of Position objects.
 		"""
 
-		self._path = API_PATH['account_positions'].replace('{account_id}', os.environ['API_ACCOUNT_ID'])
+		self._path = API_PATH['account_positions'].replace('{account_id}', self._id)
 		self._data = self._api_response(endpoint=self._endpoint, path=self._path, payload=self._payload)
 		
 		try:

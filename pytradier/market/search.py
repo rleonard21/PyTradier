@@ -3,8 +3,8 @@ from ..const import API_PATH
 
 class Search(Base):
     """ A class for searching for a company. """
-    def __init__(self, **query):
-        Base.__init__(self)
+    def __init__(self, base, **query):
+        self.__dict__.update(base.__dict__)
 
         self._payload = {}
 

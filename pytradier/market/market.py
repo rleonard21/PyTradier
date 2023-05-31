@@ -5,17 +5,17 @@ from .status import Status
 
 class Market:
 
-    def __init__(self):
-        pass
+    def __init__(self, base):
+        self.base = base
 
     def calendar(self, month=None, year=None):
-        return Calendar(month, year)
+        return Calendar(self.base, month, year)
 
     def lookup(self, **query):
-        return Lookup(**query)
+        return Lookup(self.base, **query)
 
     def search(self, **query):
-        return Search(**query)
+        return Search(self.base, **query)
 
     def status(self):
-        return Status()
+        return Status(self.base)

@@ -3,13 +3,13 @@ from ..const import API_PATH
 
 class Expirations(Base):
 
-    def __init__(self, symbol):
+    def __init__(self, base, symbol):
         """ Create an instance of the ``Expirations`` class.
         
         :param symbol: The symbol to return options expirations for. By default, this is passed from the parent ``Company`` class.              
         
         """
-        Base.__init__(self)
+        self.__dict__.update(base.__dict__)
 
         self._symbol = symbol
 

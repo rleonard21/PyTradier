@@ -3,7 +3,7 @@ from ..const import API_PATH
 
 
 class Chain(Base):
-    def __init__(self, symbol, expiration, greeks=bool):
+    def __init__(self, base, symbol, expiration, greeks=bool):
         """Create an instance of the ``Chain`` class.
 
         :param symbol: The symbol for the options chain. By default, this is passed from the parent ``Company`` class.
@@ -28,7 +28,7 @@ class Chain(Base):
         options symbol as the key and the requested data as the value.
 
         """
-        Base.__init__(self)
+        self.__dict__.update(base.__dict__)
 
         self._symbol = symbol
         self._expiration = expiration
